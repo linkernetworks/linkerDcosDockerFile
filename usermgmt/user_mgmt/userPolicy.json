@@ -1,0 +1,28 @@
+{
+     
+    "same_tenant":"role:admin and field:tenant_id=%tenant_id",
+    
+    "identity:create_user": "role:sysadmin or role:admin",
+    "identity:update_user": "role:sysadmin or rule:same_tenant",
+    "identity:delete_user": "role:sysadmin or rule:same_tenant",
+    "identity:get_user": "role:sysadmin or rule:same_tenant",
+    "identity:list_users": "role:sysadmin or rule:same_tenant",
+    "identity:change_password": "role:sysadmin or role:admin",
+
+    "identity:list_roles": "role:sysadmin",
+    "identity:create_role": "role:sysadmin",
+    "identity:update_role": "role:sysadmin",
+    "identity:delete_role": "role:sysadmin",
+
+    "identity:create_tenant": "role:sysadmin",
+    "identity:update_tenant": "role:sysadmin",
+    "identity:delete_tenant": "role:sysadmin",
+    "identity:get_tenant": "role:sysadmin or rule:same_tenant",
+    "identity:list_tenants": "role:sysadmin or rule:same_tenant",
+
+    "identity:create_token": "",
+    "identity:validate_token": "",
+     "identity:get_token":"field:token_user_id=%user_id",
+    "identity:regenerate_token": "role:sysadmin"
+
+}
