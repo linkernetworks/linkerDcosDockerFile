@@ -3,6 +3,7 @@
   "groups": [
     {
       "id": "/linkerdcos/cluster",
+      "cmd": "sleep 60s && /usr/local/bin/entrypoint.sh",
       "apps": [
         {
           "id": "/linkerdcos/cluster/clustermgmt",
@@ -40,7 +41,7 @@
             ]
           },
           "env": {
-            "MONGODB_NODES": "xxxx,xxxx,xxxx"
+            "MONGODB_NODES": "172.31.1.94,172.31.12.213,172.31.0.233"
           },
           "constraints": [
             [
@@ -51,6 +52,7 @@
         },
         {
           "id": "/linkerdcos/cluster/usermgmt",
+          "cmd": "sleep 60s && /usr/local/bin/entrypoint.sh",
           "instances": 1,
           "cpus": 0.5,
           "mem": 512,
@@ -85,7 +87,7 @@
             ]
           },
           "env": {
-            "MONGODB_NODES": "xxxx,xxxx,xxxx"
+            "MONGODB_NODES": "172.31.1.94,172.31.12.213,172.31.0.233"
           },
           "constraints": [
             [
@@ -97,12 +99,8 @@
         {
           "id": "/linkerdcos/cluster/mongodb",
           "cpus": 0.5,
-          "mem": 1024,
+          "mem": 512,
           "instances": 3,
-          "ports": [
-            27017
-          ],
-          "requirePorts": true,
           "container": {
             "type": "DOCKER",
             "docker": {
@@ -126,7 +124,7 @@
             ]
           ],
           "env": {
-            "MONGODB_NODES": "xxxx,xxxx,xxxx"
+            "MONGODB_NODES": "172.31.1.94,172.31.12.213,172.31.0.233"
           }
         }
       ]
@@ -137,7 +135,7 @@
         {
           "id": "/linkerdcos/portal/ui",
           "cpus": 0.5,
-          "mem": 1024,
+          "mem": 256,
           "instances": 1,
           "labels": {
             "HAPROXY_GROUP": "linkermgmt"
@@ -176,7 +174,7 @@
         {
           "id": "/linkerdcos/portal/redis",
           "cpus": 0.5,
-          "mem": 1024,
+          "mem": 256,
           "instances": 1,
           "labels": {
             "HAPROXY_GROUP": "linkermgmt"
@@ -220,7 +218,7 @@
         {
           "id": "deployer",
           "cpus": 0.5,
-          "mem": 1024,
+          "mem": 512,
           "instances": 1,
           "labels": {
             "HAPROXY_GROUP": "linkermgmt"
