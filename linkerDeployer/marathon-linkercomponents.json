@@ -184,7 +184,7 @@
           "container": {
             "type": "DOCKER",
             "docker": {
-              "image": "linkerrepository/liner_dcos_redis:latest",
+              "image": "linkerrepository/linker_dcos_redis:latest",
               "network": "BRIDGE",
               "portMappings": [
                 {
