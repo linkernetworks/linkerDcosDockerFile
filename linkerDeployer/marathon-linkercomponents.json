@@ -3,10 +3,10 @@
   "groups": [
     {
       "id": "/linkerdcos/cluster",
-      "cmd": "sleep 60s && /usr/local/bin/entrypoint.sh",
       "apps": [
         {
           "id": "/linkerdcos/cluster/clustermgmt",
+          "cmd": "sleep 60s && /usr/local/bin/entrypoint.sh",
           "instances": 1,
           "cpus": 0.5,
           "mem": 512,
@@ -210,6 +210,9 @@
             ]
           ]
         }
+      ],
+      "dependencies": [
+        "/linkerdcos/cluster"
       ]
     },
     {
@@ -247,6 +250,9 @@
             ]
           ]
         }
+      ],
+      "dependencies": [
+        "/linkerdcos/cluster"
       ]
     }
   ]
