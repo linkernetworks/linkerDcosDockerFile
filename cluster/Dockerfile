@@ -11,15 +11,14 @@ COPY clustermgmt/cluster_mgmt_policy.json $CLUSTER_DIR/
 COPY clustermgmt/cluster_mgmt.properties $CLUSTER_DIR/
 COPY clustermgmt/swagger-ui $CLUSTER_DIR/
 
-COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh $CLUSTER_DIR/entrypoint.sh
 
 RUN chmod +x $CLUSTER_DIR/cluster_mgmt
-RUN chmod +x /entrypoint.sh
+RUN chmod +x $CLUSTER_DIR/entrypoint.sh
 
 EXPOSE 10002
 
 VOLUME ["/var/log"]
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
-# CMD ["/usr/local/bin/cluster_mgmt","-config=/usr/local/bin/cluster_mgmt.properties"]
