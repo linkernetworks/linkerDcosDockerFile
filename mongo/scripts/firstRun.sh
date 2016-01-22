@@ -38,7 +38,15 @@ startAsMongoMaster() {
   nohup /usr/bin/mongod --dbpath /data/db --keyFile /key/mongodb-keyfile --replSet "$ReplSetName" &
   echo "waiting for mongo starup..."
   # wait until mongo started
-  while ! netstat -alp | grep 27017; do sleep 1; done 
+  # while ! netstat -alp | grep 27017; do sleep 1; done
+  RET=1
+  while [[ RET -ne 0 ]]; do
+    echo "=> Waiting for confirmation of MongoDB service startup"
+    sleep 2
+    mongo $ADMINDB --eval "help" >/dev/null 2>&1
+    RET=$?
+  done
+
   echo "Config mongo Cluster..."
   local cmd="db.auth('$ADMINUSER', '$PASS'); rs.initiate(); quit();"
   local newcmd=$cmd
@@ -68,7 +76,13 @@ createUserPwd() {
 	# Start MongoDB
   nohup /usr/bin/mongod --dbpath /data/db --nojournal &
   # wait until mongo started
-  while ! netstat -alp | grep 27017; do sleep 1; done 
+  RET=1
+  while [[ RET -ne 0 ]]; do
+    echo "=> Waiting for confirmation of MongoDB service startup"
+    sleep 2
+    mongo $ADMINDB --eval "help" >/dev/null 2>&1
+    RET=$?
+  done
 
   echo "Creating mgmt user: rootadmin for repl ..."
   local cmd1="db.createUser({ user: '$ADMINUSER', pwd: '$PASS', roles: [ { role:'$ADMINROLE', db: '$ADMINDB' } ] }); quit();"

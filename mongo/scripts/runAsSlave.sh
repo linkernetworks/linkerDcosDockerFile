@@ -39,9 +39,16 @@ else
 	echo "current master node is $masterNode"
 	echo "1.Staring MongoDB in added Slave node..."
     nohup /usr/bin/mongod --dbpath /data/db --keyFile /key/mongodb-keyfile --replSet "$ReplSetName" &
-  echo "waiting for mongo starup..."
+    echo "waiting for mongo starup..."
   # wait until mongo started
-  while ! netstat -alp | grep 27017; do sleep 1; done 
+  # while ! netstat -alp | grep 27017; do sleep 1; done 
+    RET=1
+    while [[ RET -ne 0 ]]; do
+      echo "=> Waiting for confirmation of MongoDB service startup"
+      sleep 2
+      mongo $ADMINDB --eval "help" >/dev/null 2>&1
+      RET=$?
+    done
 
     echo "2.add slave node to mongo replSet..."
     cmd2="db.auth('$ADMINUSER', '$PASS'); rs.add('$currentIP'); quit();"
