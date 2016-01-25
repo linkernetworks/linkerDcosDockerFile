@@ -4,7 +4,7 @@ zookeeper:
   command: /init.sh
   env_file: .env
   environment:
- #  - "constraint:master==true"
+   - "constraint:master==true"
    - "affinity:container!=*zookeeper*"
 
 mesosmaster:
@@ -17,7 +17,7 @@ mesosmaster:
    - MESOS_QUORUM=2
    - MESOS_REGISTRY=in_memory
    - MESOS_WORK_DIR=/var/lib/mesos
-#   - "constraint:master==true"
+   - "constraint:master==true"
    - "affinity:container!=*mesosmaster*"
 
 marathon:
@@ -26,7 +26,7 @@ marathon:
   command: /entrypoint.sh
   env_file: .env
   environment:
-#   - "constraint:master==true"
+   - "constraint:master==true"
    - "affinity:container!=*marathon*"
 
 
@@ -42,6 +42,6 @@ mesosslave:
    - MESOS_CONTAINERIZERS=docker
    - MESOS_LOG_DIR=/var/log/mesos
    - MESOS_LOGGING_LEVEL=INFO
- #  - "constraint:slave==true"
+   - "constraint:slave==true"
    - "affinity:container!=*mesosslave*"
 
