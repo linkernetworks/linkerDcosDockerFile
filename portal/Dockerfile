@@ -16,4 +16,6 @@ EXPOSE 3000
 
 VOLUME ["/var/log"]
 
+ENV NODE_ENV production
+
 ENTRYPOINT /opt/linker-dcos-portal/init.sh
