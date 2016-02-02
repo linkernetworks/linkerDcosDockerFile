@@ -127,6 +127,9 @@
             "MONGODB_NODES": "172.31.1.94,172.31.12.213,172.31.0.233"
           }
         }
+      ],
+      "dependencies": [
+        "/linkerdcos/goproxy"
       ]
     },
     {
@@ -250,9 +253,6 @@
             ]
           ]
         }
-      ],
-      "dependencies": [
-        "/linkerdcos/cluster"
       ]
     }
   ]
