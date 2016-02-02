@@ -98,7 +98,7 @@
         },
         {
           "id": "/linkerdcos/cluster/mongodb",
-          "cpus": 0.5,
+          "cpus": 0.1,
           "mem": 512,
           "instances": 3,
           "container": {
@@ -134,7 +134,7 @@
       "apps": [
         {
           "id": "/linkerdcos/portal/ui",
-          "cpus": 0.5,
+          "cpus": 0.1,
           "mem": 256,
           "instances": 1,
           "labels": {
@@ -173,7 +173,7 @@
         },
         {
           "id": "/linkerdcos/portal/redis",
-          "cpus": 0.5,
+          "cpus": 0.1,
           "mem": 256,
           "instances": 1,
           "labels": {
@@ -220,7 +220,7 @@
       "apps": [
         {
           "id": "deployer",
-          "cpus": 0.5,
+          "cpus": 0.1,
           "mem": 512,
           "instances": 1,
           "labels": {
