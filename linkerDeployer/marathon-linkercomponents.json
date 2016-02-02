@@ -8,7 +8,7 @@
           "id": "/linkerdcos/cluster/clustermgmt",
           "cmd": "sleep 60s && /usr/local/bin/entrypoint.sh",
           "instances": 1,
-          "cpus": 0.5,
+          "cpus": 0.1,
           "mem": 512,
           "dependencies": [
             "/linkerdcos/cluster/mongodb"
@@ -54,7 +54,7 @@
           "id": "/linkerdcos/cluster/usermgmt",
           "cmd": "sleep 60s && /usr/local/bin/entrypoint.sh",
           "instances": 1,
-          "cpus": 0.5,
+          "cpus": 0.1,
           "mem": 512,
           "dependencies": [
             "/linkerdcos/cluster/mongodb"
