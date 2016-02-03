@@ -14,7 +14,10 @@
     "model:create_host": "role:sysadmin",
     "model:get_host": "role:sysadmin or field:tenant_id=%tenant_id",
     "model:list_host": "role:sysadmin or rule:same_tenant",
-    "model:delete_host": "role:sysadmin"
+    "model:delete_host": "role:sysadmin",
 
+    "model:list_provider": "role:sysadmin",
+    "model:get_provider":"role:sysadmin",
+    "model:create_provider":"role:sysadmin"
 
 }
