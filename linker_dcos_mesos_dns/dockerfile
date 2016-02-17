@@ -1,0 +1,19 @@
+From linker_centos_java
+
+MAINTAINER linker
+
+WORKDIR /linker
+
+#RUN yum -y update; yum clean all; \
+
+ADD mesos-dns-v0.5.1-linux-amd64 /linker/mesos-dns
+
+RUN chmod 755 /linker/mesos-dns
+RUN mkdir /linker/config
+
+EXPOSE 53 8123	
+
+VOLUME ["/linker/config","/linker/log"]
+
+CMD ["/linker/mesos-dns", "-config=/linker/config/config.json"]
+
