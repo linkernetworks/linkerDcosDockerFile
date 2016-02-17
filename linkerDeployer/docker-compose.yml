@@ -34,7 +34,8 @@ mesosslave:
   image: linkerrepository/mesos-slave
   volumes:
    - /sys/fs/cgroup:/sys/fs/cgroup
-   - /var/run/docker.sock:/var/run/docker.sock
+   - /var/run/weave/weave.sock:/var/run/docker.sock
+   - /usr/local/bin:/usr/local/bin
   net: "host"
   command: /entrypoint.sh
   env_file: .env
@@ -44,4 +45,23 @@ mesosslave:
    - MESOS_LOGGING_LEVEL=INFO
    - "constraint:slave==true"
    - "affinity:container!=*mesosslave*"
+
+dnsserver:
+  image: linkerrepository/linker_mesos_dns
+  volumes:
+  - /linker/config:/linker/config
+  net: "host"
+  env_file: .env
+  environment:
+   - "constraint:master==true"
+   - "affinity:container!=*dnsserver*"
+
+loadbalancer:
+  image: linkerrepository/linker_marathon_lb
+  net: "host"
+  command: /marathon-lb/run sse -m http://master.mesos:8080 --group linkermgmt
+  env_file: .env
+  environment:
+   - "constraint:master==true"
+   - "affinity:container!=*loadbalancer*"
 

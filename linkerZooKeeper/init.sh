@@ -26,6 +26,4 @@ else
     sed -i 's/--serverlist--//g' $CONFIG/zookeeper.cfg
 fi
 
-if [ $? -eq 0 ];then
-    /usr/zookeeper-3.4.7/bin/zkServer.sh start /usr/zookeeper-3.4.7/conf/zookeeper.cfg
-fi
+/usr/zookeeper-3.4.7/bin/zkServer.sh start-foreground /usr/zookeeper-3.4.7/conf/zookeeper.cfg
