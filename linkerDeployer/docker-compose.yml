@@ -39,15 +39,13 @@ services:
     image: linkerrepository/mesos-slave
     volumes:
      - /sys/fs/cgroup:/sys/fs/cgroup
-     - /var/run/docker.sock:/var/run/docker.sock
-     - /var/run/weave/weave.sock:/var/run/weave/weave.sock
+     - /var/run/weave/weave.sock:/var/run/docker.sock
      - /usr/local/bin:/usr/local/bin
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
     privileged: true
     environment:
-     - DOCKER_HOST=unix:///var/run/weave/weave.sock
      - MESOS_CONTAINERIZERS=docker
      - MESOS_LOG_DIR=/var/log/mesos
      - MESOS_LOGGING_LEVEL=INFO
