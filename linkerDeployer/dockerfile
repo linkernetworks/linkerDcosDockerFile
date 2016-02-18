@@ -15,7 +15,9 @@ ADD dns-config.json /linker/config/dns-config.json
 ADD docker-compose.yml /linker/config/docker-compose.yml
 ADD dcos_deploy.properties /linker/config/dcos_deploy.properties
 ADD docker-machine /opt/local/bin/docker-machine
-RUN chmod +x /opt/local/bin/docker-machine
+ADD docker-compose /opt/local/bin/docker-compose
+ADD docker /opt/local/bin/docker
+RUN chmod +x /opt/local/bin/*
 
 #COPY the key file 
 ADD mongodb-keyfile /linker/key/mongodb-keyfile
