@@ -65,13 +65,4 @@ services:
      - "constraint:master==true"
      - "affinity:container!=*dnsserver*"
 
-  loadbalancer:
-    image: linkerrepository/linker_marathon_lb
-    network_mode: host
-    command: /marathon-lb/run sse -m http://master.mesos:8080 --group linkermgmt
-    env_file: .env
-    privileged: true
-    environment:
-     - "constraint:master==true"
-     - "affinity:container!=*loadbalancer*"
 
