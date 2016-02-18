@@ -1,69 +1,77 @@
-zookeeper:
-  image: linkerrepository/zookeeper
-  net: "host"
-  command: /init.sh
-  env_file: .env
-  environment:
-   - "constraint:master==true"
-   - "affinity:container!=*zookeeper*"
+version: '2'
+services:
+  zookeeper:
+    image: linkerrepository/zookeeper
+    network_mode: host
+    command: /init.sh
+    env_file: .env
+    privileged: true
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*zookeeper*"
 
-mesosmaster:
-  image: linkerrepository/mesos-master
-  net: "host"
-  command: /entrypoint.sh
-  env_file: .env
-  environment:
-   - MESOS_LOG_DIR=/var/log/mesos
-   - MESOS_QUORUM=2
-   - MESOS_REGISTRY=in_memory
-   - MESOS_WORK_DIR=/var/lib/mesos
-   - "constraint:master==true"
-   - "affinity:container!=*mesosmaster*"
+  mesosmaster:
+    image: linkerrepository/mesos-master
+    network_mode: host
+    command: /entrypoint.sh
+    env_file: .env
+    privileged: true
+    environment:
+     - MESOS_LOG_DIR=/var/log/mesos
+     - MESOS_QUORUM=2
+     - MESOS_REGISTRY=in_memory
+     - MESOS_WORK_DIR=/var/lib/mesos
+     - "constraint:master==true"
+     - "affinity:container!=*mesosmaster*"
 
-marathon:
-  image: linkerrepository/marathon
-  net: "host"
-  command: /entrypoint.sh
-  env_file: .env
-  environment:
-   - "constraint:master==true"
-   - "affinity:container!=*marathon*"
+  marathon:
+    image: linkerrepository/marathon
+    network_mode: host
+    command: /entrypoint.sh
+    env_file: .env
+    privileged: true
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*marathon*"
 
 
-mesosslave:
-  image: linkerrepository/mesos-slave
-  volumes:
-   - /sys/fs/cgroup:/sys/fs/cgroup
-   - /var/run/docker.sock:/var/run/docker.sock
-   - /var/run/weave/weave.sock:/var/run/weave/weave.sock
-   - /usr/local/bin:/usr/local/bin
-  net: "host"
-  command: /entrypoint.sh
-  env_file: .env
-  environment:
-   - DOCKER_HOST=unix:///var/run/weave/weave.sock
-   - MESOS_CONTAINERIZERS=docker
-   - MESOS_LOG_DIR=/var/log/mesos
-   - MESOS_LOGGING_LEVEL=INFO
-   - "constraint:slave==true"
-   - "affinity:container!=*mesosslave*"
+  mesosslave:
+    image: linkerrepository/mesos-slave
+    volumes:
+     - /sys/fs/cgroup:/sys/fs/cgroup
+     - /var/run/docker.sock:/var/run/docker.sock
+     - /var/run/weave/weave.sock:/var/run/weave/weave.sock
+     - /usr/local/bin:/usr/local/bin
+    network_mode: host
+    command: /entrypoint.sh
+    env_file: .env
+    privileged: true
+    environment:
+     - DOCKER_HOST=unix:///var/run/weave/weave.sock
+     - MESOS_CONTAINERIZERS=docker
+     - MESOS_LOG_DIR=/var/log/mesos
+     - MESOS_LOGGING_LEVEL=INFO
+     - "constraint:slave==true"
+     - "affinity:container!=*mesosslave*"
 
-dnsserver:
-  image: linkerrepository/linker_mesos_dns
-  volumes:
-  - /linker/config:/linker/config
-  net: "host"
-  env_file: .env
-  environment:
-   - "constraint:master==true"
-   - "affinity:container!=*dnsserver*"
+  dnsserver:
+    image: linkerrepository/linker_mesos_dns
+    volumes:
+    - /linker/config:/linker/config
+    network_mode: host
+    env_file: .env
+    privileged: true
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*dnsserver*"
 
-loadbalancer:
-  image: linkerrepository/linker_marathon_lb
-  net: "host"
-  command: /marathon-lb/run sse -m http://master.mesos:8080 --group linkermgmt
-  env_file: .env
-  environment:
-   - "constraint:master==true"
-   - "affinity:container!=*loadbalancer*"
+  loadbalancer:
+    image: linkerrepository/linker_marathon_lb
+    network_mode: host
+    command: /marathon-lb/run sse -m http://master.mesos:8080 --group linkermgmt
+    env_file: .env
+    privileged: true
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*loadbalancer*"
 
