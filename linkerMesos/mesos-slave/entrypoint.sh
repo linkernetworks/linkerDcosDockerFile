@@ -8,4 +8,13 @@ export MESOS_IP=$localip
 tmpHost=${HOSTNAME//./_}
 finalHost=${tmpHost//-/_}
 export MESOS_HOSTNAME=`eval echo '$'$finalHost`
+
+#!set mesos attributes env
+attrLabel=`docker info | grep \s*"LINKER_MESOS_ATTRIBUTE="`
+if [[ -n $attrLabel ]]; then
+   value=`echo $attrLabel |awk -F '=' '{print $2}'`
+   if [[ -n $value ]]; then
+     export MESOS_ATTRIBUTES=$value
+   fi
+fi
 mesos-slave
