@@ -11,7 +11,7 @@ services:
      - "affinity:container!=*zookeeper*"
 
   mesosmaster:
-    image: linkerrepository/mesos-master
+    image: linkerrepository/mesos-master:localname
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
@@ -36,17 +36,19 @@ services:
 
 
   mesosslave:
-    image: linkerrepository/mesos-slave
+    image: linkerrepository/mesos-slave:localname
     volumes:
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /var/run/weave/weave.sock:/var/run/docker.sock
      - /usr/local/bin:/usr/local/bin
+     - /tmp/mesos:/tmp/mesos
+     - /opt/mesosphere:/opt/mesosphere
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
     privileged: true
     environment:
-     - MESOS_CONTAINERIZERS=docker
+     - MESOS_CONTAINERIZERS=docker,mesos
      - MESOS_LOG_DIR=/var/log/mesos
      - MESOS_LOGGING_LEVEL=INFO
      - "constraint:slave==true"
@@ -63,4 +65,10 @@ services:
      - "constraint:master==true"
      - "affinity:container!=*dnsserver*"
 
-
+  adminrouter:
+    image: linkerrepository/linker_router
+    net: "host"
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*publicrouter*"
+   
