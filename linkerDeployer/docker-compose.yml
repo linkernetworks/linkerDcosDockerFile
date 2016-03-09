@@ -67,7 +67,7 @@ services:
 
   adminrouter:
     image: linkerrepository/linker_router
-    net: "host"
+    network_mode: host
     environment:
      - "constraint:master==true"
      - "affinity:container!=*publicrouter*"
