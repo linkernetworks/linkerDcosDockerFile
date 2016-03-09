@@ -22,8 +22,7 @@ RUN chmod +x /opt/local/bin/*
 #COPY the key file 
 ADD id_rsa.pub /linker/key/id_rsa.pub
 ADD id_rsa /root/.ssh/id_rsa
-RUN chmod 600 /linker/key/mongodb-keyfile && \
-	cp /root/.ssh/id_rsa /linker/key/id_rsa
+RUN cp /root/.ssh/id_rsa /linker/key/id_rsa
 
 #COPY the Marathon File
 ADD marathon-dnslb.json /linker/marathon/marathon-dnslb.json
