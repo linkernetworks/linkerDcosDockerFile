@@ -8,7 +8,7 @@ zookeeper:
    - "affinity:container!=*zookeeper*"
 
 mesosmaster:
-  image: linkerrepository/mesos-master
+  image: linkerrepository/mesos-master:localname
   net: "host"
   command: /entrypoint.sh
   env_file: .env
@@ -21,7 +21,7 @@ mesosmaster:
    - "affinity:container!=*mesosmaster*"
 
 marathon:
-  image: linkerrepository/marathon
+  image: linkerrepository/marathon:localname
   net: "host"
   command: /entrypoint.sh
   env_file: .env
@@ -29,19 +29,35 @@ marathon:
    - "constraint:master==true"
    - "affinity:container!=*marathon*"
 
-
 mesosslave:
-  image: linkerrepository/mesos-slave
+  image: linkerrepository/mesos-slave:localname
   volumes:
    - /sys/fs/cgroup:/sys/fs/cgroup
    - /var/run/docker.sock:/var/run/docker.sock
+   - /usr/local/bin:/usr/local/bin
+   - /tmp/mesos:/tmp
   net: "host"
   command: /entrypoint.sh
   env_file: .env
   environment:
-   - MESOS_CONTAINERIZERS=docker
+   - MESOS_CONTAINERIZERS=docker,mesos
    - MESOS_LOG_DIR=/var/log/mesos
    - MESOS_LOGGING_LEVEL=INFO
    - "constraint:slave==true"
    - "affinity:container!=*mesosslave*"
 
+dnsserver:
+  image: linkerrepository/linker_mesos_dns
+  volumes:
+   - /linker/config:/linker/config
+  net: "host"
+  environment:
+   - "constraint:master==true"
+   - "affinity:container!=*dnsserver*"
+
+publicrouter:
+  image: linkerrepository/linker_router
+  net: "host"
+  environment:
+   - "constraint:master==true"
+   - "affinity:container!=*publicrouter*"
