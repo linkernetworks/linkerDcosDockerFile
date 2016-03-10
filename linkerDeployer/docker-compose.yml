@@ -41,7 +41,7 @@ services:
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /var/run/weave/weave.sock:/var/run/docker.sock
      - /usr/local/bin:/usr/local/bin
-     - /tmp/mesos:/tmp/mesos
+     - /tmp:/tmp
      - /opt/mesosphere:/opt/mesosphere
     network_mode: host
     command: /entrypoint.sh
@@ -70,5 +70,5 @@ services:
     network_mode: host
     environment:
      - "constraint:master==true"
-     - "affinity:container!=*publicrouter*"
+     - "affinity:container!=*adminrouter*"
    
