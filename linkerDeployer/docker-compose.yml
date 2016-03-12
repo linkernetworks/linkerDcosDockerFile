@@ -70,5 +70,6 @@ services:
     network_mode: host
     environment:
      - "constraint:master==true"
+     - "constraint:adminrouter==true"
      - "affinity:container!=*adminrouter*"
    
