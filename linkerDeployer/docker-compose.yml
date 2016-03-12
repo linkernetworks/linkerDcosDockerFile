@@ -11,7 +11,7 @@ services:
      - "affinity:container!=*zookeeper*"
 
   mesosmaster:
-    image: linkerrepository/mesos-master:localname
+    image: linkerrepository/mesos-master
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
@@ -25,7 +25,7 @@ services:
      - "affinity:container!=*mesosmaster*"
 
   marathon:
-    image: linkerrepository/marathon:localname
+    image: linkerrepository/marathon
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
@@ -36,7 +36,7 @@ services:
 
 
   mesosslave:
-    image: linkerrepository/mesos-slave:localname
+    image: linkerrepository/mesos-slave
     volumes:
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /var/run/weave/weave.sock:/var/run/docker.sock
