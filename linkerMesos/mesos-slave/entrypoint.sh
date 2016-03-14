@@ -8,7 +8,11 @@ export MESOS_IP=$localip
 
 tmpHost=${HOSTNAME//./_}
 finalHost=${tmpHost//-/_}
-export MESOS_HOSTNAME=`eval echo '$'$finalHost`
+advertiseip=`eval echo '$'$finalHost`
+export MESOS_HOSTNAME=$localip
+if [[ -n $advertiseip ]]; then
+    export MESOS_ADVERTISE_IP=$advertiseip
+fi
 
 #!set mesos attributes env
 attrLabel=`docker info | grep \s*"LINKER_MESOS_ATTRIBUTE="`
