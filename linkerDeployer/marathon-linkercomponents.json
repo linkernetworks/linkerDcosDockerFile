@@ -244,7 +244,14 @@
               "image": "linkerrepository/linker_dcos_deployer:latest",
               "privileged": true,
               "forcePullImage": true
-            }
+            },
+            "volumes": [
+              {
+                "containerPath": "/linker",
+                "hostPath": "/linker",
+                "mode": "RW"
+              }
+            ]
           },
           "constraints": [
             [
