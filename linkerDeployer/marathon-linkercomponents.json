@@ -247,8 +247,13 @@
             },
             "volumes": [
               {
-                "containerPath": "/linker",
-                "hostPath": "/linker",
+                "containerPath": "/linker/docker",
+                "hostPath": "/linker/docker",
+                "mode": "RW"
+              },
+              {
+                "containerPath": "/linker/swarm",
+                "hostPath": "/linker/swarm",
                 "mode": "RW"
               }
             ]
