@@ -29,8 +29,10 @@ ADD marathon-lb.json /linker/marathon/marathon-lb.json
 ADD marathon-dashboard.json /linker/marathon/marathon-dashboard.json
 ADD marathon-linkercomponents.json /linker/marathon/marathon-linkercomponents.json
 ADD copy-ssh-id.sh /linker/copy-ssh-id.sh
+ADD copy.sh /linker/copy.sh
 RUN apt-get -y install expect && \
-	chmod 755 /linker/copy-ssh-id.sh
+	chmod 755 /linker/copy-ssh-id.sh && \
+	chmod 755 /linker/copy.sh
 
 EXPOSE 10003
 

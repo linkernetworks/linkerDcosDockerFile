@@ -1,12 +1,16 @@
 #!/usr/bin/expect
 
-set sshUser [lindex $argv 0]
-set publicip [lindex $argv 1]
-set key [lindex $argv 2]
+set pubkey [lindex $argv 0]
+set privatekey [lindex $argv 1]
+set sshUser [lindex $argv 2]
+set publicip [lindex $argv 3]
+
+
 
 set timeout 60
 
-spawn ssh-copy-id -i ${key} ${sshUser}@${publicip}
+spawn ./copy.sh ${pubkey} ${privatekey} ${sshUser} ${publicip}
+
 
 expect "Are you sure you want to continue connecting (yes/no)?"
 
