@@ -39,7 +39,7 @@ services:
     image: linkerrepository/mesos-slave
     volumes:
      - /sys/fs/cgroup:/sys/fs/cgroup
-     - /var/run/weave/weave.sock:/var/run/docker.sock
+     - /var/run/docker.sock:/var/run/docker.sock
      - /usr/local/bin:/usr/local/bin
      - /tmp:/tmp
      - /opt/mesosphere:/opt/mesosphere
