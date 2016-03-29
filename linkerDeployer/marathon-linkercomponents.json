@@ -255,6 +255,11 @@
                 "containerPath": "/linker/swarm",
                 "hostPath": "/linker/swarm",
                 "mode": "RW"
+              },
+              {
+                "containerPath": "/var/log",
+                "hostPath": "/var/log",
+                "mode": "RW"
               }
             ]
           },

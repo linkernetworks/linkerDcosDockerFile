@@ -37,7 +37,7 @@ RUN apt-get -y install expect && \
 EXPOSE 10003
 
 #Expose the config and log folder
-VOLUME ["/linker/docker","/linker/swarm"]
+VOLUME ["/linker/docker","/linker/swarm","/var/log"]
 
 #ENTRYPOINT ["/linker/dcos_deploy"]
 
