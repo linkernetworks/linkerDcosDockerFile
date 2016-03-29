@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="LinkerCloud">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="CACHE-CONTROL" content="private">
+        <meta http-equiv="Content-Encoding" content="gzip">
+        <meta name="viewport" content="width=device-width;">    
+        <title>Linker DCOS</title>
+        <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">  
+        <link media="screen" rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+        <link href="css/pagination.css" rel="stylesheet">
+        <link href="css/google/google.chart.css" rel="stylesheet">
+        <link href="css/linker/common.css" rel="stylesheet">
+         
+        <script type="text/javascript" src="js/libs/angular.min.js"></script>
+        <script type="text/javascript" src="js/libs/angular-route.min.js"></script>
+        <script type="text/javascript" src="js/libs/angular-ui-router.min.js"></script>
+
+		<script type="text/javascript" src="js/libs/angular-cookies.min.js"></script>
+        <script type="text/javascript" src="js/libs/angular-translate.min.js"></script>
+        <script type="text/javascript" src="js/libs/angular-translate-loader-static-files.min.js"></script>
+        <script type="text/javascript" src="js/libs/angular-translate-storage-cookie.min.js"></script>
+        <script type="text/javascript" src="js/libs/angular-translate-storage-local.min.js"></script>
+        <script type="text/javascript" src="js/libs/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="js/libs/underscore.js"></script>
+
+        <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/libs/ui-bootstrap-tpls-0.14.3.min.js"></script>
+        <script type="text/javascript" src="js/libs/base64.min.js"></script>
+        
+        <script type="text/javascript" src="js/libs/google/google.jsapi.js"></script>
+        <script type="text/javascript" src="js/libs/google/google.uds.js"></script>
+        <script type="text/javascript" src="js/libs/google/google.chart.js"></script>
+  
+        <script type="text/javascript" src="js/519f6494.scripts.min.js"></script>
+
+    </head>
+    <body ng-controller="MainController">
+       	<div style="float: left;width:20%;background-color: #344a5d;height:100%">
+        		<div style="width:100%;text-align: center"><img src="images/logo-docs.png" style="margin-top:50px;width:120px"></div>
+            <div style="margin-top:40px;font-size:16px">
+				<ul class="nav nav-pills nav-stacked" id="leftNavs">
+				    	<li role="presentation" class="{{item.ngclass}}" ng-repeat="item in navigators" style="margin-top: 0px;height:88px">
+				    		<a href="#{{item.href}}" ng-click="selectthis(item.name)" ng-mouseover="mouseover(item)" style="height:88px;padding-top:27px" ng-if="item.ngclass == 'default'">
+				    			<img src="images/{{item.icon}}" style="width:28px;margin-right:20px">
+				    			<span style="color:#93a4a4">{{item.name | translate}}</span>
+				    		</a>
+						<a href="#{{item.href}}" ng-click="selectthis(item.name)" style="height:88px;background-color: #243342;padding-top:27px" ng-if="item.ngclass == 'active'">
+							<img src="images/active_{{item.icon}}" style="width:28px;margin-right:20px">
+							<span style="color:#c6f0ff">{{item.name | translate}}</span>
+						</a>	
+						<a href="#{{item.href}}" ng-click="selectthis(item.name)" ng-mouseleave="mouseleave(item)" style="height:88px;padding-top:27px" ng-if="item.ngclass == 'hover'">
+							<img src="images/active_{{item.icon}}" style="width:28px;margin-right:20px">
+							<span style="color:#c6f0ff">{{item.name | translate}}</span>
+						</a>	
+				    	</li>
+			    </ul>
+			</div>	
+        </div>
+        <div style="float:right;width:80%;height:100%">
+        		<div id="right-content" style="height:100%">
+				<div class="right-content-header">
+					<div class="right-content-header-label">
+						<img src="images/title_{{selectedTabIcon}}" style="margin-right:20px">{{selectedTab | translate}}
+					</div>
+					<div class="btn-group inner-button">
+	                    <span data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                    <span style="margin-right:10px;margin-left:20px;font-weight:600">{{selectedLang.display}}</span> <span class="caret"></span>
+	                    </span>
+	                    <ul class="dropdown-menu">
+	                        <li role="menuitem" ng-repeat="lang in supportedLangs">
+	                            <a ng-click="languageSwitch(lang)">{{lang.display}}</a>
+	                        </li>
+	                    </ul>
+	                </div>
+				</div>
+				<div style="overflow: auto;height:calc(100% - 100px)" ui-view></div>
+			</div>
+        </div>
+    </body>
+</html>

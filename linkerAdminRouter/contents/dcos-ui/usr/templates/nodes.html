@@ -1,0 +1,56 @@
+<div style="height:80px">
+			<div class="btn-group" role="group" style="float:left;width:20%;margin-top:30px;margin-left: 30px">
+				<button type="button" class="btn btn-default" id="btnForCpu" ng-click="switchCharts('services.cpu')">{{'services.cpu' | translate}}</button>
+			  	<button type="button" class="btn btn-default" id="btnForMem" ng-click="switchCharts('services.memory')">{{'services.memory' | translate}}</button>
+			  	<button type="button" class="btn btn-default" id="btnForDisk" ng-click="switchCharts('services.disk')">{{'services.disk' | translate}}</button>
+			</div>
+			<div style="float: right;width:calc(80% - 30px);text-align: center;margin-top: 15px">
+				<h4>{{chartFor | translate}}{{'services.allocation_rate' | translate}}</h4>
+				<h6>{{'nodes.chart_label' | translate : nodeNum}}</h6>
+			</div>
+		</div>
+		<div class="panel-body" style="text-align: center;height: 250px">
+			<div id="node-allocation-chart"></div>
+		</div>
+		<div style="margin-left: 30px" ng-show="nodeNum.nodeNum>0">
+			<h4>{{'nodes.table_label' | translate : nodeNum}}</h4>
+			<div style="height:30px;margin-top: 10px">
+				<select class="form-control" style="float: left;height:30px;width:200px" ng-model="searchByService.service">
+					<option ng-repeat="service in servicesList track by service.id" value="{{service.id}}" ng-selected="{{service.selected}}">
+						{{service.name}}
+					</option>
+				</select>
+				<input type="search" placeholder="{{'services.filter' | translate}}" ng-model="searchFilter" class="searchBox">
+			</div>	
+			<table cellpadding="0" cellspacing="1" border="0" class="linker_table" style="width:90%">
+				<tr style="height:38px;cursor: pointer">
+					<td width="40%" ng-click="changeSortBy('hostname')">{{'nodes.table.hostname' | translate}}
+						<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-hostname'"></span>
+						<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+hostname'"></span>
+					</td>
+					<td width="15%" ng-click="changeSortBy('tasks')">{{'services.table.tasks' | translate}}
+						<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-tasks'"></span>
+						<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+tasks'"></span>
+					</td>
+					<td width="15%" ng-click="changeSortBy('cpu')">{{'services.table.cpu' | translate}}
+						<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-cpu'"></span>
+						<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+cpu'"></span>
+					</td>
+					<td width="15%" ng-click="changeSortBy('mem')">{{'services.table.mem' | translate}}
+						<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-mem'"></span>
+						<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+mem'"></span>
+					</td>
+					<td width="15%" ng-click="changeSortBy('disk')">{{'services.table.disk' | translate}}
+						<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-disk'"></span>
+						<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+disk'"></span>
+					</td>
+				</tr>
+				<tr ng-repeat="node in filterNodes() | orderBy:sortBy track by node.id" style="height:38px;background:#ffffff;color:black">
+					<td width="40%"><a ng-click="openNodePopup(node.id)" style="color:#00b5ec">{{node.hostname}}</a></td>
+					<td width="15%">{{node.tasks}}</td>
+					<td width="15%">{{node.cpu}}%</td>
+					<td width="15%">{{node.mem}}%</td>
+					<td width="15%">{{node.disk}}%</td>
+				</tr>
+			</table>
+		</div>

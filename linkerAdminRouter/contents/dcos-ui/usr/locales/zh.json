@@ -1,0 +1,77 @@
+{
+	"titles" : {
+		"dashboard" : "集群状态汇总",
+		"services" : "集群服务",
+		"nodes" : "集群节点"
+	},
+	"status" : {
+		"service" : {
+			"healthy" : "正常",
+			"unhealthy" : "不正常",
+			"idle" : "空闲",
+			"all" : "所有",
+			"other" : "空闲"
+		}
+	},
+	"dashboard" : {
+		"cpu_allocation" : "CPU占用率",
+		"mem_allocation" : "内存占用率",
+		"task_failure" : "任务失败率",
+		"service_health" : "集群服务运行状态",
+		"tasks" : "任务",
+		"nodes" : "集群节点",
+		"cpu_label" : "{{used}} 已占用,总量 {{total}}",
+		"mem_label" : "{{used}} GB 已占用,总量 {{total}} GB",
+		"tf_label" : "当前失败率",
+		"task_label" : "任务总数",
+		"node_label" : "当前集群节点数"	
+	},
+	"services" : {
+		"cpu" : "CPU",
+		"memory" : "内存",
+		"disk" : "硬盘",
+		"allocation_rate" : "占用率",
+		"chart_label" : "总共{{serviceNum}}个服务",
+		"table_label" : "{{serviceNum}}个服务",
+		"filter" : "过滤",
+		"table" : {
+			"service_name" : "服务名称",
+			"health" : "服务状态",
+			"tasks" : "任务",
+			"cpu" : "CPU",
+			"mem" : "内存",
+			"disk" : "硬盘"
+		}
+	},
+	"nodes" : {
+		"chart_label" : "总共{{nodeNum}}个节点",
+		"table_label" : "{{nodeNum}}个节点",
+		"allservices" : "所有 ",
+		"table" : {
+			"hostname" : "主机名"
+		}
+	},
+	"popup" : {
+		"common" : {
+			"details" : "详细信息",
+			"table_label" : "{{taskNum}}个任务",
+			"table" : {
+				"task_name" : "任务名称",
+				"state" : "状态",
+				"cpu" : "CPU",
+				"mem" : "内存"
+			}
+		},
+		"service" : {
+			"title" : "{{activedTasks}}个运行中的任务",
+			"openservice" : "访问该服务主页",
+			"detail" : {
+				"id" : "ID",
+				"active" : "是否活跃",
+				"registered" : "注册时间",
+				"hostname" : "主机",
+				"masterversion" : "Master版本"
+			}
+		}
+	}
+}

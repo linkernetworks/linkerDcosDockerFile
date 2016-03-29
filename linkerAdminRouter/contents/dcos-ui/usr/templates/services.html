@@ -1,0 +1,77 @@
+<div style="height:80px">
+			<div class="btn-group" role="group" style="float:left;width:20%;margin-top:30px;margin-left: 30px">
+				<button type="button" class="btn btn-default" id="btnForCpu" ng-click="switchCharts('services.cpu')">{{'services.cpu' | translate}}</button>
+			  	<button type="button" class="btn btn-default" id="btnForMem" ng-click="switchCharts('services.memory')">{{'services.memory' | translate}}</button>
+			  	<button type="button" class="btn btn-default" id="btnForDisk" ng-click="switchCharts('services.disk')">{{'services.disk' | translate}}</button>
+			</div>
+			<div style="float: right;width:calc(80% - 30px);text-align: center;margin-top: 15px">
+				<h4>{{chartFor | translate}}{{'services.allocation_rate' | translate}}</h4>
+				<h6>{{'services.chart_label' | translate : serviceNum}}</h6>
+			</div>
+		</div>
+		<div class="panel-body" style="text-align: center;height: 250px">
+			<div id="service-allocation-chart"></div>
+		</div>
+		<div style="margin-left: 30px" ng-show="serviceNum.serviceNum>0">
+			<h4>{{'services.table_label' | translate : serviceNum}}</h4>
+			<div style="height:30px;margin-top: 10px">
+				<div class="btn-group" role="group" style="float:left">
+					<button type="button" class="btn btn-default" id="statusAll" ng-click="switchStatusFilter('')">
+						<span style="float:left;margin-left:10px">{{'status.service.all' | translate}}</span>
+						<span class="subscript">{{serviceNum.serviceNum}}</span>
+					</button>
+					<button type="button" class="btn btn-default" id="statusHealthy" ng-click="switchStatusFilter('healthy')">
+					  	<span class="healthyicon"></span>
+					  	<span style="float:left;margin-left:10px">{{'status.service.healthy' | translate}}</span>
+						<span class="subscript">{{serviceNum_Healthy}}</span>
+					</button>
+					<button type="button" class="btn btn-default" id="statusUnhealthy" ng-click="switchStatusFilter('unhealthy')">
+					  	<span class="unhealthyicon"></span>
+					  	<span style="float:left;margin-left:10px">{{'status.service.unhealthy' | translate}}</span>
+						<span class="subscript">{{serviceNum_Unhealthy}}</span>  	
+					</button>
+					<button type="button" class="btn btn-default" id="statusUnknown" ng-click="switchStatusFilter('other')">
+					  	<span class="unknownicon"></span>
+					  	<span style="float:left;margin-left:10px">{{'status.service.other' | translate}}</span>
+						<span class="subscript">{{serviceNum_Unknown}}</span>
+					</button>
+				</div>
+				<input type="search" placeholder="{{'services.filter' | translate}}" ng-model="searchFilter" class="searchBox">
+			</div>	
+			<table cellpadding="0" cellspacing="1" border="0" class="linker_table" style="width:90%">
+				<tr style="height:38px;cursor: pointer">
+					<td width="30%" ng-click="changeSortBy('name')">{{'services.table.service_name' | translate}}
+						<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-name'"></span>
+						<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+name'"></span>
+					</td>
+					<td width="15%" ng-click="changeSortBy('status')">{{'services.table.health' | translate}}
+						<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-status'"></span>
+						<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+status'"></span>
+					</td>
+					<td width="10%" ng-click="changeSortBy('tasks')">{{'services.table.tasks' | translate}}
+						<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-tasks'"></span>
+						<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+tasks'"></span>
+					</td>
+					<td width="15%" ng-click="changeSortBy('cpu')">{{'services.table.cpu' | translate}}
+						<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-cpu'"></span>
+						<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+cpu'"></span>
+					</td>
+					<td width="15%" ng-click="changeSortBy('mem')">{{'services.table.mem' | translate}}
+						<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-mem'"></span>
+						<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+mem'"></span>
+					</td>
+					<td width="15%" ng-click="changeSortBy('disk')">{{'services.table.disk' | translate}}
+						<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-disk'"></span>
+						<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+disk'"></span>
+					</td>
+				</tr>
+				<tr ng-repeat="service in filterServices() | orderBy:sortBy track by service.id" style="height:38px;background:#ffffff;color:black">
+					<td width="30%"><a ng-click="openServicePopup(service.id)" style="color:#00b5ec">{{service.name}}</a></td>
+					<td width="15%"><span style="color:{{service.status_color}}">{{'status.service.' + service.status | translate}}</span></td>
+					<td width="10%">{{service.tasks}}</td>
+					<td width="15%">{{service.cpu}}</td>
+					<td width="15%">{{service.mem}} MB</td>
+					<td width="15%">{{service.disk}} MB</td>
+				</tr>
+			</table>
+		</div>

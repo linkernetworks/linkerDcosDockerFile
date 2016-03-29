@@ -1,0 +1,60 @@
+<div class="panel panel-primary" style="width:30%;margin-left:2%;margin-top: 20px;float: left">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{'dashboard.cpu_allocation' | translate}}</h3>
+			</div>
+			<div class="panel-body" style="text-align: center;height: 319px">
+				<h4>{{currentCpuAllocationRate}}<small> %</small></h4>
+				<h5 style="color:#ed5565">{{'dashboard.cpu_label' | translate : cpuLabelData}}</h5>
+				<div id="cpu-allocation-chart"></div>
+			</div>
+		</div>
+		<div class="panel panel-primary" style="width:30%;margin-left:2%;margin-top: 20px;float: left">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{'dashboard.mem_allocation' | translate}}</h3>
+			</div>
+			<div class="panel-body" style="text-align: center;height: 319px">
+				<h4>{{currentMemoryAllocationRate}}<small> %</small></h4>
+				<h5 style="color:#ed5565">{{'dashboard.mem_label' | translate : memLabelData}}</h5>
+				<div id="memory-allocation-chart"></div>
+			</div>
+		</div>
+		<div class="panel panel-primary" style="width:30%;margin-left:2%;margin-top: 20px;float: left">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{'dashboard.task_failure' | translate}}</h3>
+			</div>
+			<div class="panel-body" style="text-align: center;height: 319px">
+				<h4>{{currentTaskFailureRate}}<small> %</small></h4>
+				<h5 style="color:#ed5565">{{'dashboard.tf_label' | translate}}</h5>
+				<div id="task-failure-rate-chart"></div>
+			</div>
+		</div>
+		<div class="panel panel-primary" style="width:30%;margin-left:2%;margin-top: 20px;float: left">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{'dashboard.service_health' | translate}}</h3>
+			</div>
+			<div class="panel-body" style="text-align: center;overflow: auto;height: 319px">
+				<div ng-repeat="service in services4health" style="height:60px;width:80%">
+					<a style="float:left;color:#00b5ec" ng-click="openServicePopup(service.id)">{{service.name}}</a>
+					<span style="float:right;color:{{service.status_color}}">{{service.status | translate}}</span>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-primary" style="width:30%;margin-left:2%;margin-top: 20px;float: left">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{'dashboard.tasks' | translate}}</h3>
+			</div>
+			<div class="panel-body" style="text-align: center;height: 319px">
+				<h4>{{'dashboard.task_label' | translate}} : {{totalTaskNum}}</h4>
+				<div id="tasks-chart"></div>
+			</div>
+		</div>
+		<div class="panel panel-primary" style="width:30%;margin-left:2%;margin-top: 20px;float: left">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{'dashboard.nodes' | translate}}</h3>
+			</div>
+			<div class="panel-body" style="text-align: center;height: 319px">
+				<h4>{{currentConnectedNodes}}</h4>
+				<h5 style="color:#2ecc71">{{'dashboard.node_label' | translate}}</h5>
+				<div id="nodes-chart"></div>
+			</div>
+		</div>

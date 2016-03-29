@@ -1,0 +1,105 @@
+<div class="modal-header" style="height:100px;background-color: #337ab7">
+	<img src="images/active_services.png" style="float: left;margin-left: 10px;margin-top: 5px" width="60">
+	<div style="float: left;margin-left: 20px">
+		<h3 class="modal-title" style="color:white">{{selectedService.name}}</h3>
+     	<h5 class="modal-title" style="margin-top:10px">
+     		<span style="color:{{selectedService.status_color}}">{{'status.service.'+selectedService.status | translate}}</span> &nbsp;&nbsp; 
+     		<span style="color:burlywood">{{'popup.service.title' | translate : selectedService}}</span>
+     	</h5>
+	</div>
+    <span class="glyphicon glyphicon-remove" style="float: right;margin-right: 10px;margin-top: 20px;cursor:pointer;color:white" ng-click="close('close')"></span>
+</div>
+<div class="modal-body">
+	<div class="panel panel-primary" style="width:30%;margin-left:2%;margin-top: 20px;float: left">
+		<div class="panel-body" style="height: 300px">
+			<div style="height: 50px">
+				<img src="images/cpu.png" style="float: left" width="40">
+				<div style="float:left;margin-left:20px;margin-top:-10px">
+					<h5>{{currentUsedCPU}}</h5>
+					<h6>CPU</h6>
+				</div>
+			</div>
+			<div id="service-cpu-chart"></div>
+		</div>
+	</div>
+	<div class="panel panel-primary" style="width:30%;margin-left:2%;margin-top: 20px;float: left">
+		<div class="panel-body" style="height: 300px">
+			<div style="height: 50px">
+				<img src="images/memory.png" style="float: left" width="40">
+				<div style="float:left;margin-left:20px;margin-top:-10px">
+					<h5>{{currentUsedMem}} MB</h5>
+					<h6>{{'services.table.mem' | translate}}</h6>
+				</div>
+			</div>
+			<div id="service-mem-chart"></div>
+		</div>
+	</div>
+	<div class="panel panel-primary" style="width:30%;margin-left:2%;margin-top: 20px;float: left">
+		<div class="panel-body" style="height: 300px">
+			<div style="height: 50px">
+				<img src="images/disk.png" style="float: left" width="40">
+				<div style="float:left;margin-left:20px;margin-top:-10px">
+					<h5>{{currentUsedDisk}} MB</h5>
+					<h6>{{'services.table.disk' | translate}}</h6>
+				</div>
+			</div>
+			<div id="service-disk-chart"></div>
+		</div>
+	</div>
+	<button type="button" class="btn btn-default btn-lg" style="margin-left:2%;background-color:#337ab7;color: white" ng-click="openService()">{{'popup.service.openservice' | translate}}</button>
+	<uib-tabset style="margin-top:20px;margin-left:2%">
+		<uib-tab style="width:100px;text-align: center" heading="{{'dashboard.tasks' | translate}}">
+			<div ng-show="taskNum.taskNum>0">
+				<h4>{{'popup.common.table_label' | translate:taskNum}}</h4>
+				<input type="search" placeholder="{{'services.filter' | translate}}" ng-model="search" class="searchBox-popup">
+				<table cellpadding="0" cellspacing="1" border="0" class="linker_table">
+					<tr style="height:38px;cursor: pointer">
+						<td width="30%" ng-click="changeSortBy('name')">{{'popup.common.table.task_name' | translate}}
+							<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-name'"></span>
+							<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+name'"></span>
+						</td>
+						<td width="30%" ng-click="changeSortBy('state')">{{'popup.common.table.state' | translate}}
+							<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-state'"></span>
+							<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+state'"></span>
+						</td>
+						<td width="20%" ng-click="changeSortBy('cpu')">{{'popup.common.table.cpu' | translate}}
+							<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-cpu'"></span>
+							<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+cpu'"></span>
+						</td>
+						<td width="20%" ng-click="changeSortBy('mem')">{{'popup.common.table.mem' | translate}}
+							<span class="glyphicon glyphicon-menu-down" style="float: right;margin-right: 5px" ng-show="sortBy=='-mem'"></span>
+							<span class="glyphicon glyphicon-menu-up" style="float: right;margin-right: 5px" ng-show="sortBy=='+mem'"></span>
+						</td>
+					</tr>
+					<tr ng-repeat="task in selectedService.tasks | filter:search | orderBy:sortBy" style="height:38px;background:#ffffff;color:black">
+						<td width="30%">{{task.name}}</td>
+						<td width="30%">{{task.state}}</td>
+						<td width="20%">{{task.cpu}}</td>
+						<td width="20%">{{task.mem}} MB</td>
+					</tr>
+				</table>
+			</div>	
+			<div ng-show="taskNum.taskNum == 0">
+				<h4>{{'popup.common.table_label' | translate:taskNum}}</h4>
+			</div>
+		</uib-tab>
+		<uib-tab style="width:100px;text-align: center" heading="{{'popup.common.details' | translate}}">
+			<div style="margin-top:40px;height:30px">
+				<span style="font-weight: 700;float:left;width:40%">{{'popup.service.detail.id' | translate}}</span>
+				<span style="font-weight: 100;float:right;width:60%">{{selectedService.id}}</span>
+			</div>
+			<div style="margin-top:10px;height:30px">
+				<span style="font-weight: 700;float:left;width:40%">{{'popup.service.detail.active' | translate}}</span>
+				<span style="font-weight: 100;float:right;width:60%">{{selectedService.active}}</span>
+			</div>
+			<div style="margin-top:10px;height:30px">
+				<span style="font-weight: 700;float:left;width:40%">{{'popup.service.detail.registered' | translate}}</span>
+				<span style="font-weight: 100;float:right;width:60%">{{selectedService.registered_time}}</span>
+			</div>
+			<div style="margin-top:10px;height:30px">
+				<span style="font-weight: 700;float:left;width:40%">{{'popup.service.detail.hostname' | translate}}</span>
+				<span style="font-weight: 100;float:right;width:60%">{{selectedService.hostname}}</span>
+			</div>
+		</uib-tab>
+	</uib-tabset>
+</div>

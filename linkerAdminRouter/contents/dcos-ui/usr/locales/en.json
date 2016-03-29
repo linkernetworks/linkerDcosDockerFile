@@ -1,0 +1,77 @@
+{
+	"titles" : {
+		"dashboard" : "Dashboard",
+		"services" : "Services",
+		"nodes" : "Nodes"
+	},
+	"status" : {
+		"service" : {
+			"healthy" : "Healthy",
+			"unhealthy" : "Unhealthy",
+			"idle" : "Idle",
+			"all" : "All",
+			"other" : "Idle"
+		}
+	},
+	"dashboard" : {
+		"cpu_allocation" : "CPU Allocation",
+		"mem_allocation" : "Memory Allocation",
+		"task_failure" : "Task Failure Rate",
+		"service_health" : "Service Health",
+		"tasks" : "Tasks",
+		"nodes" : "Nodes",
+		"cpu_label" : "{{used}} of {{total}} Shares",
+		"mem_label" : "{{used}} GiB of {{total}} GiB",
+		"tf_label" : "Current Failure Rate",
+		"task_label" : "Total Tasks",
+		"node_label" : "Connected Nodes"
+	},
+	"services" : {
+		"cpu" : "CPU",
+		"memory" : "Memory",
+		"disk" : "Disk",
+		"allocation_rate" : " Allocation Rate",
+		"chart_label" : "{{serviceNum}} Total Services",
+		"table_label" : "{{serviceNum}} Services",
+		"filter" : "Filter",
+		"table" : {
+			"service_name" : "SERVICE NAME",
+			"health" : "HEALTH",
+			"tasks" : "TASKS",
+			"cpu" : "CPU",
+			"mem" : "MEMORY",
+			"disk" : "DISK"
+		}
+	},
+	"nodes" : {
+		"chart_label" : "{{nodeNum}} Total Nodes",
+		"table_label" : "{{nodeNum}} Nodes",
+		"allservices" : "All Services ",
+		"table" : {
+			"hostname" : "HOSTNAME"
+		}
+	},
+	"popup" : {
+		"common" : {
+			"details" : "Details",
+			"table_label" : "{{taskNum}} Tasks",
+			"table" : {
+				"task_name" : "TASK NAME",
+				"state" : "STATE",
+				"cpu" : "CPU",
+				"mem" : "MEMORY"
+			}
+		},
+		"service" : {
+			"title" : "{{activedTasks}} Active Tasks",
+			"openservice" : "Open Service",
+			"detail" : {
+				"id" : "ID",
+				"active" : "Active",
+				"registered" : "Registered",
+				"hostname" : "Host Name",
+				"masterversion" : "Master Version"
+			}
+		}
+	}
+}
