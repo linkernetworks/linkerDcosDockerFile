@@ -6,6 +6,7 @@ services:
     command: /init.sh
     env_file: .env
     privileged: true
+    restart: always
     environment:
      - "constraint:master==true"
      - "affinity:container!=*zookeeper*"
@@ -16,6 +17,7 @@ services:
     command: /entrypoint.sh
     env_file: .env
     privileged: true
+    restart: always
     environment:
      - MESOS_LOG_DIR=/var/log/mesos
      - MESOS_QUORUM=2
@@ -30,6 +32,7 @@ services:
     command: /entrypoint.sh
     env_file: .env
     privileged: true
+    restart: always
     environment:
      - "constraint:master==true"
      - "affinity:container!=*marathon*"
@@ -47,6 +50,7 @@ services:
     command: /entrypoint.sh
     env_file: .env
     privileged: true
+    restart: always
     environment:
      - MESOS_CONTAINERIZERS=docker,mesos
      - MESOS_LOG_DIR=/var/log/mesos
@@ -61,6 +65,7 @@ services:
     network_mode: host
     env_file: .env
     privileged: true
+    restart: always
     environment:
      - "constraint:master==true"
      - "affinity:container!=*dnsserver*"
@@ -68,6 +73,7 @@ services:
   adminrouter:
     image: linkerrepository/linker_router
     network_mode: host
+    restart: always
     environment:
      - "constraint:master==true"
      - "constraint:adminrouter==true"
