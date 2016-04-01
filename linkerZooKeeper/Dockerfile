@@ -10,8 +10,8 @@ RUN mkdir -p /data/runtime && \
     mkdir -p /data/zookeeper/log && \
     mkdir -p /data/zookeeper/snapshot
 
-RUN curl -fL http://apache.fayea.com/zookeeper/zookeeper-3.4.7/zookeeper-3.4.7.tar.gz | tar xzf - -C /usr
-ADD zookeeper.cfg /usr/zookeeper-3.4.7/conf/
+RUN curl -fL http://apache.fayea.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz | tar xzf - -C /usr
+ADD zookeeper.cfg /usr/zookeeper-3.4.6/conf/
 ADD init.sh /
 
 RUN chmod 755 init.sh

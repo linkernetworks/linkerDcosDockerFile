@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z $CONFIG ];then
-    CONFIG="/usr/zookeeper-3.4.7/conf"
+    CONFIG="/usr/zookeeper-3.4.6/conf"
 fi
 
 if [ ! -z "$ZOOKEEPERLIST" ];then
@@ -26,4 +26,4 @@ else
     sed -i 's/--serverlist--//g' $CONFIG/zookeeper.cfg
 fi
 
-/usr/zookeeper-3.4.7/bin/zkServer.sh start-foreground /usr/zookeeper-3.4.7/conf/zookeeper.cfg
+/usr/zookeeper-3.4.6/bin/zkServer.sh start-foreground /usr/zookeeper-3.4.6/conf/zookeeper.cfg
