@@ -5,6 +5,7 @@ function gen_serviceurl(service_name)
     local records = common.mesos_dns_get_srv(service_name)
     local first_ip = records[1]['ip']
     local first_port = records[1]['port']
+    ngx.var.servicescheme = "http"
     return "http://" .. first_ip .. ":" .. first_port
 end
 
@@ -36,6 +37,7 @@ for _, framework in ipairs(state["frameworks"]) do
                 parsed_webui_url.path = ""
             end
             ngx.var.serviceurl = parsed_webui_url:build()
+            ngx.var.servicescheme = parsed_webui_url.scheme
             return
         end
         ngx.log(ngx.DEBUG, ngx.var.serviceurl)
