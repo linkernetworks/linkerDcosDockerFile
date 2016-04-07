@@ -1,0 +1,29 @@
+ALERT HighConnectSessionAlert
+  IF container_current_session_high_result > 0
+  FOR 15s
+  WITH {}
+  SUMMARY "HighConnectSessionAlert"
+  DESCRIPTION "HighConnectSessionAlert for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+
+ALERT LowConnectSessionAlert
+  IF container_current_session_low_result < 0
+  FOR 1m
+  WITH {}
+  SUMMARY "LowConnectSessionAlert"
+  DESCRIPTION "LowConnectSessionAlert for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+
+ALERT HighRevPackagesAlert
+  IF container_network_receive_packets_per_second_total_high_result > 1
+  FOR 15s
+  WITH {}
+  SUMMARY "HighRevPackagesAlert"
+  DESCRIPTION "HighRevPackagesAlert for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+
+ALERT LowRevPackagesAlert
+  IF container_network_receive_packets_per_second_total_low_result < 1
+  FOR 1m
+  WITH {}
+  SUMMARY "LowRevPackagesAlert"
+  DESCRIPTION "LowRevPackagesAlert for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+
+

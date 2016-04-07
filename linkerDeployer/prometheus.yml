@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+  external_labels:
+    monitor: linker-metrics
+
+rule_files: 
+- /opt/prometheus/prometheus.rules
+
+scrape_configs:
+- job_name: prometheus
+  scrape_interval: 5s
+  scrape_timeout: 10s 
+
+  target_groups:
+    # These endpoints are scraped via HTTP.
+    - targets: ['192.168.10.71:10000','192.168.10.70:10000']

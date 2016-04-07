@@ -34,6 +34,11 @@ RUN apt-get -y install expect && \
 	chmod 755 /linker/copy-ssh-id.sh && \
 	chmod 755 /linker/copy.sh
 
+#COPY the Prometheus File
+ADD alert-config.yml /linker/alertmanager/config.json
+ADD prometheus.rules /linker/prometheus/prometheus.rules
+ADD prometheus.yml /linker/prometheus/prometheus.yml
+
 EXPOSE 10003
 
 #Expose the config and log folder
