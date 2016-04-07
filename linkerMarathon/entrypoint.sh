@@ -9,4 +9,4 @@ tmpHost=${HOSTNAME//./_}
 finalHost=${tmpHost//-/_}
 #export MARATHON_HOSTNAME=`eval echo '$'$finalHost`
 export MARATHON_HOSTNAME=$localip
-marathon --no-logger
+marathon --no-logger --event_subscriber http_callback
