@@ -104,3 +104,16 @@ services:
      - "constraint:monitor==true"
      - "affinity:container!=*alertmanager*"
 
+  mongodb:
+    image: linkerrepository/linkerdcos_mongodb_repl
+    network_mode: host
+    volumes:
+    - /opt:/data
+    env_file: .env
+    privileged: true
+    restart: always
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*mongodb*"
+
+
