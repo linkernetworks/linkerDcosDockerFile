@@ -13,6 +13,7 @@ RUN chmod 755 /entrypoint.sh
 #COPY the config file 
 ADD dns-config.json /linker/config/dns-config.json
 ADD docker-compose.yml /linker/config/docker-compose.yml
+ADD docker-compose-user.yml /linker/config/docker-compose-user.yml
 ADD dcos_deploy.properties /linker/config/dcos_deploy.properties
 ADD docker-machine /opt/local/bin/docker-machine
 ADD docker-compose /opt/local/bin/docker-compose
