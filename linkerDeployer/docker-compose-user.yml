@@ -117,4 +117,19 @@ services:
      - "constraint:master==true"
      - "affinity:container!=*mongodb*"
 
-
+  dcosclient:
+    images: linkerrepository/linkerdcos_client
+    network_mode: host
+    volumes:
+    - /linker/docker:/linker/docker
+    - /var/log:/var/log
+    env_file: .env
+    privileged: true
+    restart: always
+    depends_on:
+     - mongodb
+    entrypoint: /usr/local/bin/dbcheck.sh
+    command: /usr/local/bin/entrypoint.sh
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*dcosclient*"    
