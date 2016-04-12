@@ -6,8 +6,7 @@ ENV VERSION 1.0
 
 RUN ln -f -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-RUN  apt-get -y update && \
-     apt-get -y install vim && \
+RUN  apt-get -y install vim && \
      apt-get -y install unzip
 
 ADD clientmgmt/dcos_client /usr/local/bin/dcos_client
