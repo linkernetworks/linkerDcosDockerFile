@@ -1,10 +1,10 @@
 FROM centos:7
 
 # Update CentOS 7
-RUN yum update -y && yum upgrade -y
+RUN yum update -y 
 
 # Install packages
-RUN yum install -y unzip wget curl git net-tools
+RUN yum install -y unzip wget curl net-tools
 
 # Install EPEL Repository
 RUN yum install -y epel-release
