@@ -35,6 +35,9 @@ RUN apt-get -y install expect && \
 	chmod 755 /linker/copy-ssh-id.sh && \
 	chmod 755 /linker/copy.sh
 
+#COPY cadvisor File
+ADD cadvisor.json /linker/marathon/cadvisor.json
+
 #COPY the Prometheus File
 ADD alert-config.yml /linker/alertmanager/config.json
 ADD prometheus.rules /linker/prometheus/prometheus.rules
