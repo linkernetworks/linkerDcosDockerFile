@@ -1,4 +1,4 @@
-FROM linkerrepository/dcos-cli
+FROM linkerrepository/dcos-cli:jdk
 
 MAINTAINER linker 
 
@@ -8,6 +8,9 @@ RUN ln -f -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 RUN  apt-get -y install vim && \
      apt-get -y install unzip
+
+RUN mkdir -p /opt/local/bin
+ENV PATH=/opt/local/bin:$PATH
 
 ADD clientmgmt/dcos_client /usr/local/bin/dcos_client
 ADD clientmgmt/dcos_client.properties /usr/local/bin/dcos_client.properties
