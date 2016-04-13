@@ -20,7 +20,8 @@ getMaster() {
  done
 }
 
-currentIP=`ifconfig eth0 | grep "inet " |cut -d: -f2| awk '{print $2}'`
+ifname=${ENNAME:-eth0}
+currentIP=`ifconfig $ifname | grep "inet " |cut -d: -f2| awk '{print $2}'`
 IPs=${MONGODB_NODES}
 ReplSetName=${MONGODB_REP_NAME:-linkerSet}
 PASS=${MONGODB_PASSWORD:-password}

@@ -123,8 +123,9 @@ if [[  -z "$IPs" ]]; then
 	exit 10
 fi
 
+ifname=${ENNAME:-eth0}
 #split IPs by ","
-currentIP=`ifconfig eth0 | grep "inet " |cut -d: -f2| awk '{print $2}'`
+currentIP=`ifconfig $ifname | grep "inet " |cut -d: -f2| awk '{print $2}'`
 isMaster=false
 masterCount=0
 OLD_IFS="$IFS" 
