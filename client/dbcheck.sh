@@ -24,7 +24,7 @@ isMongoReady() {
 
     command_exists telnet
     if [[ $? -ne 0 ]]; then
-        yum install -y telnet
+        sudo apt-get install -y telnet
     fi
 	while true
 	do
