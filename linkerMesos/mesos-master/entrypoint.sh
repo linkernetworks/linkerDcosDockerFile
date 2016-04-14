@@ -5,8 +5,11 @@ fi
 localip=`ip addr show $ENNAME|grep "inet.*brd.*$ENNAME"|awk '{print $2}'|awk -F/ '{print $1}'`
 
 export MESOS_IP=$localip
+
+hostNamePrefix="linker_hostname_"
 tmpHost=${HOSTNAME//./_}
 finalHost=${tmpHost//-/_}
+finalHost=$hostNamePrefix$finalHost 
 advertiseip=`eval echo '$'$finalHost`
 export MESOS_HOSTNAME=$localip
 if [[ -n $advertiseip ]]; then
