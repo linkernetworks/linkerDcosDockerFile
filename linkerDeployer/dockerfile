@@ -21,9 +21,9 @@ ADD docker /opt/local/bin/docker
 RUN chmod +x /opt/local/bin/*
 
 #COPY the key file 
-ADD id_rsa.pub /linker/key/id_rsa.pub
-ADD id_rsa /root/.ssh/id_rsa
-RUN cp /root/.ssh/id_rsa /linker/key/id_rsa
+#ADD id_rsa.pub /linker/key/id_rsa.pub
+#ADD id_rsa /root/.ssh/id_rsa
+#RUN cp /root/.ssh/id_rsa /linker/key/id_rsa
 
 #COPY the Marathon File
 ADD marathon-lb.json /linker/marathon/marathon-lb.json
