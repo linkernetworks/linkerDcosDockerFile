@@ -102,7 +102,7 @@ services:
      - "affinity:container!=*prometheus*"
 
   alertmanager:
-    image: prom/prometheus:0.17.0
+    image: prom/alertmanager:stable
     network_mode: host
     volumes:
     - /linker/alertmanager:/etc/alertmanager
