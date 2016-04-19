@@ -91,7 +91,7 @@ services:
     image: prom/prometheus:0.17.0
     network_mode: host
     entrypoint: /bin/prometheus
-    command: -alertmanager.url=http://localhost:9093
+    command: -alertmanager.url=http://localhost:9093 -config.file=/etc/prometheus/prometheus.yml
     volumes:
     - /linker/prometheus:/etc/prometheus
     env_file: .env
