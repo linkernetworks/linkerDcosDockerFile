@@ -135,3 +135,11 @@ services:
     environment:
      - "constraint:master==true"
      - "affinity:container!=*dcosclient*"    
+
+  genresolvconf:
+    image: linkerrepository/linker_resolver
+    network_mode: host
+    env_file: .env
+    restart: always
+    environment:
+     - "affinity:container!=*genresolvconf*"
