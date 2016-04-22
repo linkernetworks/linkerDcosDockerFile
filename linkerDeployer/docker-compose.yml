@@ -81,8 +81,11 @@ services:
 
   genresolvconf:
     image: linkerrepository/linker_resolver
+    volumes:
+    - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
     env_file: .env
     restart: always
     environment:
+     - RESOLVERS=8.8.8.8
      - "affinity:container!=*genresolvconf*"
