@@ -24,4 +24,5 @@ if [[ -n $attrLabel ]]; then
      export MESOS_ATTRIBUTES=$value
    fi
 fi
+ 
 mesos-slave
