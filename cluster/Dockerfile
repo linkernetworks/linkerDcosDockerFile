@@ -6,6 +6,8 @@ ENV CLUSTER_DIR /usr/local/bin
 
 RUN ln -f -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
+RUN yum -y install openssh-server
+
 COPY clustermgmt/cluster_mgmt $CLUSTER_DIR/
 COPY clustermgmt/cluster_mgmt_policy.json $CLUSTER_DIR/
 COPY clustermgmt/cluster_mgmt.properties $CLUSTER_DIR/
