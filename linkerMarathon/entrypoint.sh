@@ -13,5 +13,4 @@ finalHost=$hostNamePrefix$finalHost
 #export MARATHON_HOSTNAME=`eval echo '$'$finalHost`
 export MARATHON_HOSTNAME=$localip
 
-http_endpoints="http://master.mesos:10004/v1/marathon/notify"
-marathon --no-logger --event_subscriber http_callback --http_endpoints $http_endpoints
+marathon --no-logger 
