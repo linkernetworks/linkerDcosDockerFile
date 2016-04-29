@@ -3,21 +3,37 @@
     "same_tenant":"role:admin and field:tenant_id=%tenant_id",
     
 
-    "model:create_cluster": "role:sysadmin",
-    "model:update_cluster": "role:sysadmin",
-    "model:get_cluster": "role:sysadmin or field:tenant_id=%tenant_id",
-    "model:delete_cluster": "role:sysadmin or field:tenant_id=%tenant_id",
-    "model:delete_clusters": "role:sysadmin or rule:same_tenant",
-    "model:list_cluster": "role:sysadmin or rule:same_tenant",
+    "model:create_cluster": "role:sysadmin or role:admin",
+    "model:update_cluster": "role:sysadmin or rule:same_tenant",
+    "model:get_cluster": "role:sysadmin or rule:same_tenant",
+    "model:delete_cluster": "role:sysadmin or rule:same_tenant",
+    "model:list_cluster": "field:tenant_id=%tenant_id",
 
 
-    "model:create_host": "role:sysadmin",
-    "model:get_host": "role:sysadmin or field:tenant_id=%tenant_id",
-    "model:list_host": "role:sysadmin or rule:same_tenant",
-    "model:delete_host": "role:sysadmin",
+    "model:create_host": "role:sysadmin or role:admin",
+    "model:get_host": "role:sysadmin or rule:same_tenant",
+    "model:list_host": "field:tenant_id=%tenant_id",
+    "model:delete_host": "role:sysadmin or rule:same_tenant",
+    "model:update_host": "role:sysadmin or rule:same_tenant",
+    
+    "model:create_smtp": "role:sysadmin",
+    "model:get_smtp": "role:sysadmin",
+    "model:update_smtp": "role:sysadmin",
+    "model:delete_smtp": "role:sysadmin",
+    "model:list_smtp": "role:sysadmin",
 
-    "model:list_provider": "role:sysadmin",
-    "model:get_provider":"role:sysadmin",
-    "model:create_provider":"role:sysadmin"
+    "model:create_log": "role:sysadmin or role:admin",
+    "model:list_logs": "field:tenant_id=%tenant_id",
+
+    "model:create_pubkey": "role:sysadmin or role:admin",
+    "model:list_pubkey": "field:tenant_id=%tenant_id",
+    "model:get_pubkey": "role:sysadmin or rule:same_tenant",
+    "model:delete_pubkey": "role:sysadmin or rule:same_tenant",
+
+    "model:list_provider": "field:tenant_id=%tenant_id",
+    "model:get_provider":"role:sysadmin or rule:same_tenant",
+    "model:create_provider":"role:sysadmin or role:admin",
+    "model:update_provider":"role:sysadmin or role:admin",  
+    "model:delete_provider": "role:sysadmin or rule:same_tenant"
 
 }
