@@ -6,6 +6,17 @@
 # MONGODB_NODES=172.10.17.101,172.10.17.102,172.10.17.103,172.10.17.104
 # export MONGODB_NODES=172.10.17.101,172.10.17.102,172.10.17.103,172.10.17.104
 
+if [ -z "$ENNAME" ];then
+    ENNAME=eth0
+fi
+localip=`ip addr show $ENNAME|grep "inet.*brd.*$ENNAME"|awk '{print $2}'|awk -F/ '{print $1}'`
+dcos_key="core.dcos_url"
+dcos_value="http://$localip"
+
+dcos config set $dcos_key $dcos_value
+
+
+
 newline="mongod.product.uri=mongodb:\/\/"
 
 string=$MONGODB_NODES
