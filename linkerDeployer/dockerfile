@@ -53,7 +53,7 @@ RUN chmod 755 /entrypoint.sh
 EXPOSE 10003
 
 #Expose the config and log folder
-VOLUME ["/linker/docker","/linker/swarm","/linker/config","/var/log"]
+VOLUME ["/linker/docker","/linker/swarm","/var/log"]
 
 #ENTRYPOINT ["/linker/dcos_deploy"]
 

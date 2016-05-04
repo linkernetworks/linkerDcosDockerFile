@@ -258,11 +258,6 @@
                 "mode": "RW"
               },
               {
-                "containerPath": "/linker/config",
-                "hostPath": "/linker/config",
-                "mode": "RW"
-              },
-              {
                 "containerPath": "/var/log",
                 "hostPath": "/var/log",
                 "mode": "RW"
