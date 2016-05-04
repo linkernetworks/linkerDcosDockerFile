@@ -5,10 +5,10 @@ MAINTAINER linker
 WORKDIR /linker
 
 #COPY the bin file 
-ADD dcos_deploy /linker/dcos_deploy
-RUN chmod 755 /linker/dcos_deploy
-ADD entrypoint.sh /entrypoint.sh
-RUN chmod 755 /entrypoint.sh
+#ADD dcos_deploy /linker/dcos_deploy
+#RUN chmod 755 /linker/dcos_deploy
+#ADD entrypoint.sh /entrypoint.sh
+#RUN chmod 755 /entrypoint.sh
 
 #COPY the config file 
 ADD dns-config.json /linker/config/dns-config.json
@@ -43,10 +43,17 @@ ADD alert-config.yml /linker/alertmanager/config.yml
 ADD prometheus.rules /linker/prometheus/prometheus.rules
 ADD prometheus.yml /linker/prometheus/prometheus.yml
 
+
+#COPY the bin file 
+ADD dcos_deploy /linker/dcos_deploy
+RUN chmod 755 /linker/dcos_deploy
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
+
 EXPOSE 10003
 
 #Expose the config and log folder
-VOLUME ["/linker/docker","/linker/swarm","/var/log"]
+VOLUME ["/linker/docker","/linker/swarm","/linker/config","/var/log"]
 
 #ENTRYPOINT ["/linker/dcos_deploy"]
 

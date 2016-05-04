@@ -124,7 +124,8 @@
             ]
           ],
           "env": {
-            "MONGODB_NODES": "172.31.1.94,172.31.12.213,172.31.0.233"
+            "MONGODB_NODES": "172.31.1.94,172.31.12.213,172.31.0.233",
+            "ENNAME": "eth0"
           }
         }
       ],
@@ -254,6 +255,11 @@
               {
                 "containerPath": "/linker/swarm",
                 "hostPath": "/linker/swarm",
+                "mode": "RW"
+              },
+              {
+                "containerPath": "/linker/config",
+                "hostPath": "/linker/config",
                 "mode": "RW"
               },
               {
