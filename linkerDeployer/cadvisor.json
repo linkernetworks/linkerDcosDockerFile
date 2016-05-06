@@ -33,6 +33,11 @@
                           "mode": "RO"
                         },
                         {
+                          "containerPath": "/tmp/mesos",
+                          "hostPath": "/tmp/mesos",
+                          "mode": "RO"
+                        },
+                        {
                           "containerPath": "/var/lib/docker",
                           "hostPath": "/var/lib/docker",
                           "mode": "RO"
