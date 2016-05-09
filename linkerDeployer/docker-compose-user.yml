@@ -85,7 +85,7 @@ services:
     image: linkerrepository/linker_router
     network_mode: host
     depends_on:
-     - dnsserver
+     - genresolvconf
     restart: always
     environment:
      - "constraint:master==true"
