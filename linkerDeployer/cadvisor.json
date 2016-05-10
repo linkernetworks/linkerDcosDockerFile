@@ -38,6 +38,11 @@
                           "mode": "RO"
                         },
                         {
+                          "containerPath": "/var/run",
+                          "hostPath": "/var/run",
+                          "mode": "RW"
+                        },
+                        {
                           "containerPath": "/var/lib/docker",
                           "hostPath": "/var/lib/docker",
                           "mode": "RO"
