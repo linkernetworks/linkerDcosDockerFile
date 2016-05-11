@@ -26,4 +26,47 @@ ALERT LowRevPackagesAlert
   SUMMARY "LowRevPackagesAlert"
   DESCRIPTION "LowRevPackagesAlert for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
 
+ALERT HighMemoryAlert
+  IF container_memory_usage_high_result > 1
+  FOR 20s
+  WITH {}
+  SUMMARY "High Memory usage alert for container"
+  DESCRIPTION "High Memory usage for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+ 
 
+ALERT LowMemoryAlert
+  IF container_memory_usage_low_result < 1
+  FOR 1m
+  WITH {}
+  SUMMARY "Low Memory usage alert for container"
+  DESCRIPTION "Low Memory usage for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+
+ALERT HighCPUAlert
+  IF container_cpu_usage_high_result > 1
+  FOR 20s
+  WITH {}
+  SUMMARY "High CPU usage alert for container"
+  DESCRIPTION "High CPU usage for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+
+
+ALERT LowCPUAlert
+  IF container_cpu_usage_low_result < 1
+  FOR 1m
+  WITH {}
+  SUMMARY "Low CPU usage alert for container"
+  DESCRIPTION "Low CPU usage for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+
+ALERT HighTransmitPackageNumberAlert
+  IF container_transmit_package_number_high_result > 1
+  FOR 20s
+  WITH {}
+  SUMMARY "High Transmit Package Number alert for container"
+  DESCRIPTION "High Transmit Package Number for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+
+
+ALERT LowTransmitPackageNumberAlert
+  IF container_transmit_package_number_low_result < 1
+  FOR 1m
+  WITH {}
+  SUMMARY "Low Transmit Package Number alert for container"
+  DESCRIPTION "Low Transmit Package Number for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
