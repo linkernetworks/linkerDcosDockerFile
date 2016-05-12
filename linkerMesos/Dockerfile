@@ -15,5 +15,5 @@ RUN echo "set number" >> /etc/vimrc && \
 RUN mkdir -p /var/mesos/external_log && \
     mkdir -p /var/mesos/log && \
     mkdir -p /var/mesos/work
-RUN curl -fLsS https://get.docker.com/ | sh
+RUN curl -fLsS https://s3-ap-southeast-1.amazonaws.com/docker-engine/v1.11.0/docker-install.sh | sh
 
