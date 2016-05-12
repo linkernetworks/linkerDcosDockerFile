@@ -7,8 +7,7 @@ ENV VERSION 1.0
 
 RUN ln -f -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-RUN yum -y update && \
-    yum -y install vim && \
+RUN yum -y install vim && \
     yum -y install unzip && \
     yum -y install net-tools.x86_64
 
