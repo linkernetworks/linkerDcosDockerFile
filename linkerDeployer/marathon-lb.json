@@ -21,7 +21,8 @@
 				"-m",
 				"http://master.mesos:8080",
 				"--group",
-				"linkermgmt"
+				"linkermgmt",
+				"--dont-bind-http-https"
 			]
 		}]
 	}]
