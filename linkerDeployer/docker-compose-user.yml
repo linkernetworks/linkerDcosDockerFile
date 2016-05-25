@@ -15,6 +15,8 @@ services:
     image: linkerrepository/mesos-master
     network_mode: host
     command: /entrypoint.sh
+    volumes:
+     - DOCKERCLIENT_PATH:/usr/bin/docker
     env_file: .env
     depends_on:
      - zookeeper
@@ -50,6 +52,7 @@ services:
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /var/run/docker.sock:/var/run/docker.sock
      - /usr/local/bin:/usr/local/bin
+     - DOCKERCLIENT_PATH:/usr/bin/docker
      - /tmp:/tmp
      - /opt/mesosphere:/opt/mesosphere
     network_mode: host
