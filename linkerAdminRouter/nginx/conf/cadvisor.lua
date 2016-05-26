@@ -9,7 +9,7 @@ end
 for _, slave in ipairs(state["slaves"]) do
     if slave["id"] == ngx.var.slaveid then
         local split_pid = slave["pid"]:split("@")
-        local split_sip = split_pid［2］:split(":")
+        local split_sip = split_pid[2]:split(":")
         ngx.var.slaveaddr = split_sip[1] .. ":10000"
         ngx.log(
             ngx.DEBUG, "cadvisor slaveid / slaveaddr:" .. 
