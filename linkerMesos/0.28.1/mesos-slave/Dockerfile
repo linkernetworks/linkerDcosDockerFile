@@ -4,6 +4,11 @@ MAINTAINER ychen <ychen@linkernetworks.com>
 ADD entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
+# install docker using default installation script
+RUN curl -sSL https://s3-ap-southeast-1.amazonaws.com/docker-engine/default/docker-install.sh | sh -
+
+#RUN systemctl stop docker.service && systemctl disable docker.service
+
 EXPOSE 5051
 
 ENV MESOS_CONTAINERIZERS docker,mesos

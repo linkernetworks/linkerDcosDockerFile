@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 MAINTAINER ychen <ychen@linkernetworks.com>
 
-ENV MESOS_VERSION 0.28.1
+ENV VERSION 0.28.1
 
 RUN apt-get update && \
     apt-get -y install curl unzip
@@ -18,5 +18,5 @@ RUN mkdir -p /var/mesos/external_log && \
 RUN echo "deb http://repos.mesosphere.io/ubuntu/ trusty main" > /etc/apt/sources.list.d/mesosphere.list && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF && \
     apt-get -y update && \
-    apt-get -y --no-install-recommends install mesos=$(apt-cache madison mesos | grep ${MESOS_VERSION} | awk '{print $3}')
+    apt-get -y --no-install-recommends install mesos=$(apt-cache madison mesos | grep ${VERSION} | awk '{print $3}')
 

@@ -23,7 +23,7 @@ services:
     environment:
      - MESOS_LOG_DIR=/var/log/mesos
      - MESOS_QUORUM=2
-     - MESOS_REGISTRY=in_memory
+     #- MESOS_REGISTRY=in_memory
      - MESOS_WORK_DIR=/var/lib/mesos
      - "constraint:master==true"
      - "affinity:container!=*mesosmaster*"
@@ -48,7 +48,7 @@ services:
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /var/run/docker.sock:/var/run/docker.sock
      - /usr/local/bin:/usr/local/bin
-     - DOCKERCLIENT_PATH:/usr/bin/docker
+     #- DOCKERCLIENT_PATH:/usr/bin/docker
      - /tmp:/tmp
      - /opt/mesosphere:/opt/mesosphere
     network_mode: host
