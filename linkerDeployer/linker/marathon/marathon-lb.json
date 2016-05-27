@@ -1,0 +1,29 @@
+{
+	"id": "/linkerdns",
+	"groups": [
+	{
+		"id": "lb",
+		"apps": [{
+			"id": "marathonlb",
+			"container": {
+				"type": "DOCKER",
+				"docker": {
+					"image": "linkerrepository/linker_marathon_lb",
+					"privileged": true,
+					"network": "HOST"
+				}
+			},
+			"instances": 3,
+			"cpus": 0.1,
+			"mem": 512,
+			"args": [
+				"sse",
+				"-m",
+				"http://master.mesos:8080",
+				"--group",
+				"linkermgmt",
+				"--dont-bind-http-https"
+			]
+		}]
+	}]
+}

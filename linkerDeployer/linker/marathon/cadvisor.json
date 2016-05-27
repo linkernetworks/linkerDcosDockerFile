@@ -1,0 +1,62 @@
+{
+   "id":"/linkercadvisor",
+   "groups":[{
+         "id":"monitor",
+         "apps":[
+            {
+               "id":"cadvisor",
+               "cpus":0.1,
+               "mem":1024,
+               "instances":2,
+               "constraints": [
+                [
+                  "hostname",
+                  "UNIQUE"
+                  ]
+                ],
+               "container":{
+                  "type":"DOCKER",
+                  "volumes": [
+                        {
+                          "containerPath": "/var/run/docker.sock",
+                          "hostPath": "/var/run/docker.sock",
+                          "mode": "RW"
+                        },
+                        {
+                          "containerPath": "/rootfs",
+                          "hostPath": "/",
+                          "mode": "RO"
+                        },
+                        {
+                          "containerPath": "/sys",
+                          "hostPath": "/sys",
+                          "mode": "RO"
+                        },
+                        {
+                          "containerPath": "/tmp/mesos",
+                          "hostPath": "/tmp/mesos",
+                          "mode": "RO"
+                        },
+                        {
+                          "containerPath": "/var/run",
+                          "hostPath": "/var/run",
+                          "mode": "RW"
+                        },
+                        {
+                          "containerPath": "/var/lib/docker",
+                          "hostPath": "/var/lib/docker",
+                          "mode": "RO"
+                        }
+                      ],
+                  "docker":{
+                     "network":"HOST",
+                     "image":"linkerrepository/linker_cadvisor",
+                     "privileged":true,
+                      "forcePullImage":true
+                  }
+               }
+            }
+         ]
+
+      }]
+}

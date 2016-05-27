@@ -1,0 +1,277 @@
+{
+  "id": "/linkerdcos",
+  "groups": [
+    {
+      "id": "/linkerdcos/cluster",
+      "apps": [
+        {
+          "id": "/linkerdcos/cluster/clustermgmt",
+          "cmd": "sleep 60s && /usr/local/bin/entrypoint.sh",
+          "instances": 1,
+          "cpus": 0.1,
+          "mem": 512,
+          "dependencies": [
+            "/linkerdcos/cluster/mongodb"
+          ],
+          "labels": {
+            "HAPROXY_GROUP": "linkermgmt"
+          },
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "linkerrepository/linkerdcos_clustermgmt:latest",
+              "network": "BRIDGE",
+              "portMappings": [
+                {
+                  "containerPort": 10002,
+                  "hostPort": 0,
+                  "servicePort": 10002,
+                  "protocol": "tcp"
+                }
+              ],
+              "privileged": true,
+              "forcePullImage": true
+            },
+            "volumes": [
+              {
+                "containerPath": "/var/log",
+                "hostPath": "/var/log",
+                "mode": "RW"
+              }
+            ]
+          },
+          "env": {
+            "MONGODB_NODES": "172.31.1.94,172.31.12.213,172.31.0.233"
+          },
+          "constraints": [
+            [
+              "hostname",
+              "UNIQUE"
+            ]
+          ]
+        },
+        {
+          "id": "/linkerdcos/cluster/usermgmt",
+          "cmd": "sleep 60s && /usr/local/bin/entrypoint.sh",
+          "instances": 1,
+          "cpus": 0.1,
+          "mem": 512,
+          "dependencies": [
+            "/linkerdcos/cluster/mongodb"
+          ],
+          "labels": {
+            "HAPROXY_GROUP": "linkermgmt"
+          },
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "linkerrepository/linkerdcos_usermgmt:latest",
+              "network": "BRIDGE",
+              "portMappings": [
+                {
+                  "containerPort": 10001,
+                  "hostPort": 0,
+                  "servicePort": 10001,
+                  "protocol": "tcp"
+                }
+              ],
+              "privileged": true,
+              "forcePullImage": true
+            },
+            "volumes": [
+              {
+                "containerPath": "/var/log",
+                "hostPath": "/var/log",
+                "mode": "RW"
+              }
+            ]
+          },
+          "env": {
+            "MONGODB_NODES": "172.31.1.94,172.31.12.213,172.31.0.233"
+          },
+          "constraints": [
+            [
+              "hostname",
+              "UNIQUE"
+            ]
+          ]
+        },
+        {
+          "id": "/linkerdcos/cluster/mongodb",
+          "cpus": 0.1,
+          "mem": 512,
+          "instances": 3,
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "linkerrepository/linkerdcos_mongodb_repl:latest",
+              "network": "HOST",
+              "privileged": true,
+              "forcePullImage": true
+            },
+            "volumes": [
+              {
+                "containerPath": "/data",
+                "hostPath": "/opt",
+                "mode": "RW"
+              }
+            ]
+          },
+          "constraints": [
+            [
+              "hostname",
+              "UNIQUE"
+            ]
+          ],
+          "env": {
+            "MONGODB_NODES": "172.31.1.94,172.31.12.213,172.31.0.233",
+            "ENNAME": "eth0"
+          }
+        }
+      ],
+      "dependencies": [
+        "/linkerdcos/goproxy"
+      ]
+    },
+    {
+      "id": "/linkerdcos/portal",
+      "apps": [
+        {
+          "id": "/linkerdcos/portal/ui",
+          "cpus": 0.1,
+          "mem": 256,
+          "instances": 1,
+          "labels": {
+            "HAPROXY_GROUP": "linkermgmt"
+          },
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "network": "BRIDGE",
+              "portMappings": [
+                {
+                  "containerPort": 3000,
+                  "hostPort": 0,
+                  "servicePort": 10010,
+                  "protocol": "tcp"
+                }
+              ],
+              "image": "linkerrepository/linker_dcos_portal:latest",
+              "privileged": true,
+              "forcePullImage": true
+            },
+            "volumes": [
+              {
+                "containerPath": "/var/log",
+                "hostPath": "/var/log",
+                "mode": "RW"
+              }
+            ]
+          },
+          "constraints": [
+            [
+              "hostname",
+              "UNIQUE"
+            ]
+          ]
+        },
+        {
+          "id": "/linkerdcos/portal/redis",
+          "cpus": 0.1,
+          "mem": 256,
+          "instances": 1,
+          "labels": {
+            "HAPROXY_GROUP": "linkermgmt"
+          },
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "linkerrepository/linker_dcos_redis:latest",
+              "network": "BRIDGE",
+              "portMappings": [
+                {
+                  "containerPort": 6379,
+                  "hostPort": 0,
+                  "servicePort": 10011,
+                  "protocol": "tcp"
+                }
+              ],
+              "privileged": true,
+              "forcePullImage": true
+            },
+            "volumes": [
+              {
+                "containerPath": "/var/log/redis",
+                "hostPath": "/var/log/redis",
+                "mode": "RW"
+              }
+            ]
+          },
+          "constraints": [
+            [
+              "hostname",
+              "UNIQUE"
+            ]
+          ]
+        }
+      ],
+      "dependencies": [
+        "/linkerdcos/cluster"
+      ]
+    },
+    {
+      "id": "goproxy",
+      "apps": [
+        {
+          "id": "deployer",
+          "cpus": 0.1,
+          "mem": 512,
+          "instances": 1,
+          "labels": {
+            "HAPROXY_GROUP": "linkermgmt"
+          },
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "network": "BRIDGE",
+              "portMappings": [
+                {
+                  "containerPort": 10003,
+                  "hostPort": 0,
+                  "servicePort": 10003,
+                  "protocol": "tcp"
+                }
+              ],
+              "image": "linkerrepository/linker_dcos_deployer:latest",
+              "privileged": true,
+              "forcePullImage": true
+            },
+            "volumes": [
+              {
+                "containerPath": "/linker/docker",
+                "hostPath": "/linker/docker",
+                "mode": "RW"
+              },
+              {
+                "containerPath": "/linker/swarm",
+                "hostPath": "/linker/swarm",
+                "mode": "RW"
+              },
+              {
+                "containerPath": "/var/log",
+                "hostPath": "/var/log",
+                "mode": "RW"
+              }
+            ]
+          },
+          "constraints": [
+            [
+              "hostname",
+              "UNIQUE"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

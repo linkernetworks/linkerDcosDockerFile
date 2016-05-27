@@ -1,0 +1,104 @@
+version: '2'
+services:
+  zookeeper:
+    image: linkerrepository/zookeeper
+    network_mode: host
+    command: /init.sh
+    env_file: .env
+    privileged: true
+    restart: always
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*zookeeper*"
+
+  mesosmaster:
+    image: linkerrepository/mesos-master:0.28.1
+    network_mode: host
+    command: /entrypoint.sh
+    env_file: .env
+    depends_on:
+     - zookeeper
+    privileged: true
+    restart: always
+    environment:
+     - MESOS_LOG_DIR=/var/log/mesos
+     - MESOS_QUORUM=2
+     #- MESOS_REGISTRY=in_memory
+     - MESOS_WORK_DIR=/var/lib/mesos
+     - "constraint:master==true"
+     - "affinity:container!=*mesosmaster*"
+
+  marathon:
+    image: linkerrepository/marathon:1.1.1
+    network_mode: host
+    command: /entrypoint.sh
+    env_file: .env
+    depends_on:
+     - zookeeper
+    privileged: true
+    restart: always
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*marathon*"
+
+
+  mesosslave:
+    image: linkerrepository/mesos-slave:0.28.1
+    volumes:
+     - /sys/fs/cgroup:/sys/fs/cgroup
+     - /var/run/docker.sock:/var/run/docker.sock
+     - /usr/local/bin:/usr/local/bin
+     #- DOCKERCLIENT_PATH:/usr/bin/docker
+     - /tmp:/tmp
+     - /opt/mesosphere:/opt/mesosphere
+    network_mode: host
+    command: /entrypoint.sh
+    env_file: .env
+    depends_on:
+     - zookeeper
+    privileged: true
+    restart: always
+    environment:
+     - MESOS_CONTAINERIZERS=docker,mesos
+     - MESOS_LOG_DIR=/var/log/mesos
+     - MESOS_LOGGING_LEVEL=INFO
+     - "constraint:slave==true"
+     - "affinity:container!=*mesosslave*"
+
+  dnsserver:
+    image: linkerrepository/linker_mesos_dns
+    volumes:
+    - /linker/config:/linker/config
+    network_mode: host
+    env_file: .env
+    depends_on:
+     - zookeeper
+    privileged: true
+    restart: always
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*dnsserver*"
+
+  adminrouter:
+    image: linkerrepository/linker_router
+    network_mode: host
+    depends_on:
+     - genresolvconf
+    restart: always
+    environment:
+     - "constraint:master==true"
+     - "constraint:adminrouter==true"
+     - "affinity:container!=*adminrouter*"
+
+  genresolvconf:
+    image: linkerrepository/linker_resolver
+    volumes:
+    - /etc/resolv.conf:/etc/resolv.conf
+    network_mode: host
+    env_file: .env
+    depends_on:
+     - dnsserver
+    restart: always
+    environment:
+     - RESOLVERS=8.8.8.8
+     - "affinity:container!=*genresolvconf*"
