@@ -15,8 +15,6 @@ services:
     image: linkerrepository/mesos-master:0.28.1
     network_mode: host
     command: /entrypoint.sh
-    volumes:
-     - DOCKERCLIENT_PATH:/usr/bin/docker
     env_file: .env
     depends_on:
      - zookeeper
