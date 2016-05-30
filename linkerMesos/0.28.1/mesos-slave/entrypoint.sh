@@ -11,7 +11,7 @@ tmpHost=${HOSTNAME//./_}
 finalHost=${tmpHost//-/_}
 finalHost=$hostNamePrefix$finalHost 
 advertiseip=`eval echo '$'$finalHost`
-export MESOS_HOSTNAME=$hostname
+export MESOS_HOSTNAME=$(hostname -f)
 if [[ -n $advertiseip ]]; then
     export MESOS_ADVERTISE_IP=$advertiseip
 fi
