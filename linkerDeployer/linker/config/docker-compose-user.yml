@@ -161,3 +161,19 @@ services:
     environment:
      - RESOLVERS=8.8.8.8
      - "affinity:container!=*genresolvconf*"
+
+  cadvisormonitor:
+    image: linkerrepository/linker_cadvisor
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:rw
+    - /:/rootfs:ro
+    - /sys:/sys:ro
+    - /tmp/mesos:/tmp/mesos:ro
+    - /var/run:/var/run:rw
+    - /var/lib/docker:/var/lib/docker:ro
+    network_mode: host
+    env_file: .env
+    privileged: true
+    restart: always
+    environment:
+      - "constraint:slave==true"
