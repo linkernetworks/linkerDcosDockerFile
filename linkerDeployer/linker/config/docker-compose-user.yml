@@ -132,7 +132,7 @@ services:
      - "affinity:container!=*mongodb*"
 
   dcosclient:
-    image: linkerrepository/linkerdcos_client
+    image: linkerrepository/linkerdcos_client:1.1.0
     network_mode: host
     volumes:
     - /linker/docker:/linker/docker

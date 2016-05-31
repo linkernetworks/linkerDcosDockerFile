@@ -19,7 +19,7 @@
           "container": {
             "type": "DOCKER",
             "docker": {
-              "image": "linkerrepository/linkerdcos_clustermgmt:latest",
+              "image": "linkerrepository/linkerdcos_clustermgmt:1.1.0",
               "network": "BRIDGE",
               "portMappings": [
                 {
@@ -65,7 +65,7 @@
           "container": {
             "type": "DOCKER",
             "docker": {
-              "image": "linkerrepository/linkerdcos_usermgmt:latest",
+              "image": "linkerrepository/linkerdcos_usermgmt:1.1.0",
               "network": "BRIDGE",
               "portMappings": [
                 {
@@ -156,7 +156,7 @@
                   "protocol": "tcp"
                 }
               ],
-              "image": "linkerrepository/linker_dcos_portal:latest",
+              "image": "linkerrepository/linker_dcos_portal:1.1.0",
               "privileged": true,
               "forcePullImage": true
             },
@@ -242,7 +242,7 @@
                   "protocol": "tcp"
                 }
               ],
-              "image": "linkerrepository/linker_dcos_deployer:latest",
+              "image": "linkerrepository/linker_dcos_deployer:1.1.0",
               "privileged": true,
               "forcePullImage": true
             },
