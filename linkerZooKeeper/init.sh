@@ -4,7 +4,11 @@ if [ -z $CONFIG ];then
     CONFIG="/usr/zookeeper-3.4.6/conf"
 fi
 
-if [ ! -z "$ZOOKEEPERLIST" ];then
+array=(${ZOOKEEPERLIST//,/ })
+len=${#array[@]}
+echo "zookeeper list length is $len"
+if [ $len -gt 1 ];then
+    echo "zookeeper will be startup in distributed mode"
     if [ -z "$ENNAME" ];then
 	ENNAME=eth0
     fi
@@ -23,6 +27,7 @@ if [ ! -z "$ZOOKEEPERLIST" ];then
     echo $ZKID > /data/zookeeper/snapshot/myid && \
     sed -i 's/--serverlist--/'$zks'/g' $CONFIG/zookeeper.cfg
 else
+    echo "zookeeper will be startup in standalone mode"
     sed -i 's/--serverlist--//g' $CONFIG/zookeeper.cfg
 fi
 
