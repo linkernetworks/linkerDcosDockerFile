@@ -1,7 +1,7 @@
 version: '2'
 services:
   zookeeper:
-    image: linkerrepository/zookeeper
+    image: linkerrepository/zookeeper:1.0.0
     network_mode: host
     command: /init.sh
     env_file: .env
@@ -68,7 +68,7 @@ services:
      - "affinity:container!=*mesosslave*"
 
   dnsserver:
-    image: linkerrepository/linker_mesos_dns
+    image: linkerrepository/linker_mesos_dns:1.0.0
     volumes:
     - /linker/config:/linker/config
     network_mode: host
@@ -82,7 +82,7 @@ services:
      - "affinity:container!=*dnsserver*"
 
   adminrouter:
-    image: linkerrepository/linker_router
+    image: linkerrepository/linker_router:1.0.0
     network_mode: host
     depends_on:
      - genresolvconf
@@ -120,7 +120,7 @@ services:
      - "affinity:container!=*alertmanager*"
 
   mongodb:
-    image: linkerrepository/linkerdcos_mongodb_repl
+    image: linkerrepository/linkerdcos_mongodb_repl:1.0.0
     network_mode: host
     volumes:
     - /opt:/data
@@ -150,7 +150,7 @@ services:
      - "affinity:container!=*dcosclient*"    
 
   genresolvconf:
-    image: linkerrepository/linker_resolver
+    image: linkerrepository/linker_resolver:1.0.0
     volumes:
     - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host

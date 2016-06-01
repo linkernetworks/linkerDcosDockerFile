@@ -104,7 +104,7 @@
           "container": {
             "type": "DOCKER",
             "docker": {
-              "image": "linkerrepository/linkerdcos_mongodb_repl:latest",
+              "image": "linkerrepository/linkerdcos_mongodb_repl:1.0.0",
               "network": "HOST",
               "privileged": true,
               "forcePullImage": true
@@ -186,7 +186,7 @@
           "container": {
             "type": "DOCKER",
             "docker": {
-              "image": "linkerrepository/linker_dcos_redis:latest",
+              "image": "linkerrepository/linker_dcos_redis:1.0.0",
               "network": "BRIDGE",
               "portMappings": [
                 {

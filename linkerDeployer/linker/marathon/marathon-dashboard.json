@@ -10,7 +10,7 @@
 			"container": {
 				"type": "DOCKER",
 				"docker": {
-					"image": "linkerrepository/linker-dcos-dashboard:latest",
+					"image": "linkerrepository/linker-dcos-dashboard:1.1.0",
 					"network": "BRIDGE",
 					"portMappings": [
        				 	{ "containerPort": 6688, "hostPort": 0, "servicePort": 10012, "protocol": "tcp" }

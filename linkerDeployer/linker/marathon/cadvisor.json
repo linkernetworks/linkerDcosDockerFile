@@ -50,7 +50,7 @@
                       ],
                   "docker":{
                      "network":"HOST",
-                     "image":"linkerrepository/linker_cadvisor",
+                     "image":"linkerrepository/linker_cadvisor:1.0.0",
                      "privileged":true,
                       "forcePullImage":true
                   }
