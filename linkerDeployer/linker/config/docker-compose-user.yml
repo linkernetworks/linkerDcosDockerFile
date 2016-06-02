@@ -177,3 +177,4 @@ services:
     restart: always
     environment:
       - "constraint:slave==true"
+      - "affinity:container!=*cadvisormonitor*"
