@@ -147,6 +147,7 @@ services:
     command: /usr/local/bin/entrypoint.sh
     environment:
      - "constraint:master==true"
+     - "constraint:dcosclient==true"
      - "affinity:container!=*dcosclient*"    
 
   genresolvconf:
