@@ -1,4 +1,4 @@
-From linker_centos_java
+From linkerrepository/linker_centos_java
 
 MAINTAINER linker
 
@@ -6,7 +6,7 @@ WORKDIR /linker
 
 #RUN yum -y update; yum clean all; \
 
-ADD mesos-dns-v0.5.1-linux-amd64 /linker/mesos-dns
+ADD mesos-dns-v0.5.2-linux-amd64 /linker/mesos-dns
 
 RUN chmod 755 /linker/mesos-dns
 RUN mkdir /linker/config
