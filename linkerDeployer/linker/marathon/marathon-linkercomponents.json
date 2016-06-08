@@ -2,10 +2,10 @@
   "id": "/linkerdcos",
   "groups": [
     {
-      "id": "/linkerdcos/cluster",
+      "id": "cluster",
       "apps": [
         {
-          "id": "/linkerdcos/cluster/clustermgmt",
+          "id": "clustermgmt",
           "cmd": "sleep 60s && /usr/local/bin/entrypoint.sh",
           "instances": 1,
           "cpus": 0.1,
@@ -51,7 +51,7 @@
           ]
         },
         {
-          "id": "/linkerdcos/cluster/usermgmt",
+          "id": "usermgmt",
           "cmd": "sleep 60s && /usr/local/bin/entrypoint.sh",
           "instances": 1,
           "cpus": 0.1,
@@ -97,7 +97,7 @@
           ]
         },
         {
-          "id": "/linkerdcos/cluster/mongodb",
+          "id": "mongodb",
           "cpus": 0.1,
           "mem": 512,
           "instances": 3,
@@ -134,10 +134,10 @@
       ]
     },
     {
-      "id": "/linkerdcos/portal",
+      "id": "portal",
       "apps": [
         {
-          "id": "/linkerdcos/portal/ui",
+          "id": "ui",
           "cpus": 0.1,
           "mem": 256,
           "instances": 1,
@@ -176,7 +176,7 @@
           ]
         },
         {
-          "id": "/linkerdcos/portal/redis",
+          "id": "redis",
           "cpus": 0.1,
           "mem": 256,
           "instances": 1,
