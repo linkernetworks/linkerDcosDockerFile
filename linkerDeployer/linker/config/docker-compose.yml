@@ -22,7 +22,6 @@ services:
     restart: always
     environment:
      - MESOS_LOG_DIR=/var/log/mesos
-     - MESOS_QUORUM=2
      #- MESOS_REGISTRY=in_memory
      - MESOS_WORK_DIR=/var/lib/mesos
      - "constraint:master==true"
