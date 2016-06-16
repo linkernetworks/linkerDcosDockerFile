@@ -1,0 +1,40 @@
+{
+  "id": "/influxdb",
+  "cpus": 1,
+  "mem": 4096,
+  "disk": 0,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "tutum/influxdb",
+      "privileged": false,
+      "network": "BRIDGE",
+      "parameters": [],
+      "forcePullImage": false,
+      "portMappings": [
+        {
+          "containerPort": 8083,
+          "hostPort": 0,
+          "servicePort":18083,
+          "protocol": "tcp"
+        },
+        {
+          "containerPort": 8086,
+          "hostPort": 0,
+          "servicePort":18086,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  },
+  "env":{
+    "PRE_CREATE_DB":"iot",
+    "ADMIN_USER":"root",
+    "INFLUXDB_INIT_PWD":"123456"
+  },
+  "labels": {
+    "HAPROXY_GROUP": "linkermgmt"
+  }
+}
