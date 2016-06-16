@@ -22,6 +22,10 @@ RUN chmod +x /usr/local/bin/dbcheck.sh
 RUN chmod +x /opt/local/bin/docker-machine
 RUN chmod +x /opt/local/bin/docker
 
+RUN mkdir -p /opt/local/smack
+ADD smack /opt/local/smack/
+RUN chmod +x /opt/local/smack/*.sh
+
 EXPOSE 10004
 
 VOLUME ["/var/log", "/linker/docker"]
