@@ -11,8 +11,6 @@ RUN chmod +x /entrypoint.sh
 
 EXPOSE 8080
 
-ENV MARATHON_EVENT_SUBSCRIBER http_callback
-ENV MARATHON_HTTP_ENDPOINTS http://master.mesos:10004/v1/marathon/notify
 ENV MARATHON_LOGGING_LEVEL warn
 
 CMD ["/entrypoint.sh"]
