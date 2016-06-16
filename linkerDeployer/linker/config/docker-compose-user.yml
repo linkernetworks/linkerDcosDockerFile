@@ -38,7 +38,6 @@ services:
     restart: always
     environment:
      - MARATHON_EVENT_SUBSCRIBER=http_callback
-     - MARATHON_HTTP_ENDPOINTS=http://master.mesos:10004/v1/marathon/notify 
      - "constraint:master==true"
      - "affinity:container!=*marathon*"
 
