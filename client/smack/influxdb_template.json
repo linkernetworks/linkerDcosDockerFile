@@ -4,7 +4,7 @@
   "mem": 4096,
   "disk": 0,
   "instances": 1,
-  "constraints":[["hostname","CLUSTER","172.17.2.94"]],
+  "constraints":[["hostname","CLUSTER","placeholder"]],
   "container": {
     "type": "DOCKER",
     "volumes": [{
