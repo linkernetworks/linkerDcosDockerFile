@@ -45,7 +45,7 @@ else
    echo to clear spark on zk
    ./zk -zk master.mesos:2181 -path /spark_mesos_dispatcher
    echo clear spark on zk finish
-   dcos package install --yes spark
+   dcos package install --yes --options=spark.json spark
 fi
 
 waitSparkFrameworkStartup
