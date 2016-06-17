@@ -1,7 +1,7 @@
 {
   "id": "/tweeter",
   "cmd": "export KAFKA_BROKERS=`curl -s master.mesos:8123/v1/services/_broker-0._tcp.kafka.mesos | python -c 'import sys, json; j = json.load(sys.stdin); print(j[0][\"ip\"] + \":\" + j[0][\"port\"])'` && until rake cassandra:setup; do sleep 5; done && rails server",
-  "cpus": 0.25,
+  "cpus": 0.1,
   "mem": 256,
   "disk": 0,
   "instances": 1,

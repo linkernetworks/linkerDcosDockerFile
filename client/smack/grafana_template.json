@@ -1,6 +1,6 @@
 {
   "id": "/grafana",
-  "cpus": 1,
+  "cpus": 0.1,
   "mem": 1024,
   "disk": 0,
   "instances": 1,
