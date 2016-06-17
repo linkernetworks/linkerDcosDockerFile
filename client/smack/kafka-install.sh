@@ -90,7 +90,7 @@ waitKafkaFrameworkStartup
 
 while true ; do
   echo to add broker 0
-  dcos kafka broker add 0
+  dcos kafka broker add 0 --cpus 0.1
   
   getNode0
   if [[ $node0ip != "" &&  $node0options =~ 'advertised.host.name' && $node0state == 'true' ]] ; then
