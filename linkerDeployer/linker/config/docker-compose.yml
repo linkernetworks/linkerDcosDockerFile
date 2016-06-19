@@ -60,6 +60,7 @@ services:
     environment:
      - MESOS_CONTAINERIZERS=docker,mesos
      - MESOS_LOG_DIR=/var/log/mesos
+     - MESOS_EXECUTOR_REGISTRATION_TIMEOUT=15mins
      - MESOS_LOGGING_LEVEL=INFO
      - "constraint:slave==true"
      - "affinity:container!=*mesosslave*"
