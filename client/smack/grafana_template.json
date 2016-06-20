@@ -1,0 +1,37 @@
+{
+  "id": "/grafana",
+  "cpus": 0.1,
+  "mem": 1024,
+  "disk": 0,
+  "instances": 1,
+  "constraints":[["hostname","CLUSTER","placeholder"]],
+  "container": {
+    "type": "DOCKER",
+    "volumes": [{
+                "containerPath": "/var/lib/grafana",
+                "hostPath": "/var/grafana",
+                "mode": "RW"
+            }],
+    "docker": {
+      "image": "grafana/grafana",
+      "privileged": false,
+      "network": "BRIDGE",
+      "parameters": [],
+      "forcePullImage": false,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 0,
+          "servicePort":13000,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  },
+  "env":{
+    "GF_INSTALL_PLUGINS":"grafana-piechart-panel,grafana-simple-json-datasource"
+  },
+  "labels": {
+    "HAPROXY_GROUP": "linkermgmt"
+  }
+}
