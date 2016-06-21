@@ -1,14 +1,6 @@
 #! /bin/bash
 
-line=`dcos marathon app list|grep \/tweeter|wc -l`
-
-echo tweeter installed=$line
-
-if [[ $line -eq 1 ]]; then
-   echo tweeter already installed.
-else
-   echo to install tweeter..
-   dcos marathon app add tweeter.json
-   echo tweeter already installed.
-fi
-
+echo to install tweeter..
+curl -X POST --header 'Content-Type: */*' --header 'Accept: application/json' -d @tweeter.json 'http://localhost:10004/v1/appsets/'
+curl -X PUT --header 'Content-Type: */*' --header 'Accept: application/json' 'http://localhost:10004/v1/appsets/tweeter/start'
+echo tweeter already installed.

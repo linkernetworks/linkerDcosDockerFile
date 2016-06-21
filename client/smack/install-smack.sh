@@ -7,46 +7,33 @@ echo
 echo 
 
 
-#echo check to install cassandra
-#./cassandra-install.sh
-#echo ------------------------------------------------------------
-#echo
-#echo 
-
-echo check to install hdfs
-./hdfs-install.sh
+echo check to install cassandra
+./cassandra-install.sh
 echo ------------------------------------------------------------
 echo
-echo
+echo 
 
-echo check to install spark
 ./spark-install.sh
 echo ------------------------------------------------------------
 echo
 echo 
 
 
-#echo check to install tweeter
-#./tweeter-install.sh
-#echo ------------------------------------------------------------
-#echo
-#echo 
-
-#echo check to install zeppelin
-#./zeppelin-install.sh
-#echo ------------------------------------------------------------
-#echo
-#echo
-
-
-echo check to install influxdb
-./influxdb-install.sh
+echo check to install tweeter
+./tweeter-install.sh
 echo ------------------------------------------------------------
+echo
 echo 
+
+echo check to install zeppelin
+./zeppelin-install.sh
+echo ------------------------------------------------------------
+echo
 echo
 
-echo check to install grafana
-./grafana-install.sh
+
+echo check to install iot-dashboard(influxdb,grafana,hdfs)
+./iot-dashboard-install.sh
 echo ------------------------------------------------------------
 echo 
 echo
