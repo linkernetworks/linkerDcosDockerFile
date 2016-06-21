@@ -7,11 +7,11 @@ echo
 echo 
 
 
-echo check to install cassandra
-./cassandra-install.sh
-echo ------------------------------------------------------------
-echo
-echo 
+#echo check to install cassandra
+#./cassandra-install.sh
+#echo ------------------------------------------------------------
+#echo
+#echo 
 
 echo check to install hdfs
 ./hdfs-install.sh
@@ -26,13 +26,30 @@ echo
 echo 
 
 
-echo check to install tweeter
-./tweeter-install.sh
-echo ------------------------------------------------------------
-echo
-echo 
+#echo check to install tweeter
+#./tweeter-install.sh
+#echo ------------------------------------------------------------
+#echo
+#echo 
 
-echo check to install zeppelin
-./zeppelin-install.sh
+#echo check to install zeppelin
+#./zeppelin-install.sh
+#echo ------------------------------------------------------------
+#echo
+#echo
+
+
+echo check to install influxdb
+./influxdb-install.sh
 echo ------------------------------------------------------------
-echo all components install finish.
+echo 
+echo
+
+echo check to install grafana
+./grafana-install.sh
+echo ------------------------------------------------------------
+echo 
+echo
+
+
+#echo all components install finish.
