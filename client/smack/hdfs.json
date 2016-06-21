@@ -1,7 +1,7 @@
 {
   "id": "/hdfs",
   "cpus": 0.1,
-  "cmd": "p9100=`netstat -anp|grep -i listen|grep tcp|grep 9100|wc -l`;p50010=`netstat -anp|grep -i listen|grep tcp|grep 50010|wc -l`;p50020=`netstat -anp|grep -i listen|grep tcp|grep 50020|wc -l`;p50070=`netstat -anp|grep -i listen|grep tcp|grep 50070|wc -l`;if [[ $p9100 -eq 0 && $p50010 -eq 0 && $p50020 -eq 0 && $p50030 -eq 0 ]]; then sed -i '/service sshd start/ ased -i s/:9000/:9100/ /usr/local/hadoop/etc/hadoop/core-site.xml' /etc/bootstrap.sh;sed -i 's/\\$HADOOP_PREFIX\\/sbin\\/start-yarn.sh//' /etc/bootstrap.sh;/etc/bootstrap.sh -d; else echo port conflict; fi",
+  "cmd":"p9100=`netstat -anp|grep -i listen|grep tcp|grep 9100|wc -l`;p50010=`netstat -anp|grep -i listen|grep tcp|grep 50010|wc -l`;p50020=`netstat -anp|grep -i listen|grep tcp|grep 50020|wc -l`;p50070=`netstat -anp|grep -i listen|grep tcp|grep 50070|wc -l`;if [[ $p9100 -eq 0 && $p50010 -eq 0 && $p50020 -eq 0 && $p50030 -eq 0 ]]; then sed -i '/service sshd start/ ased -i s/:9000/:9100/ /usr/local/hadoop/etc/hadoop/core-site.xml' /etc/bootstrap.sh;sed -i 's/\\$HADOOP_PREFIX\\/sbin\\/start-yarn.sh//' /etc/bootstrap.sh;sed -i '/\\$HADOOP_PREFIX\\/sbin\\/start-dfs.sh/ awhile true; do rs=`./usr/local/hadoop/bin/hadoop fs -mkdir -p hdfs://hdfs.marathon.mesos:9100/user/spark/{log,checkpoint} 2>&1`;echo $rs;rs=`echo $rs|grep -i mkdir|wc -l`;echo $rs; if [[ rs -gt 0 ]];then sleep 2 ;else echo dir create ok; break; fi; done;' /etc/bootstrap.sh;/etc/bootstrap.sh -d; else echo port conflict; fi",
   "mem": 1024,
   "disk": 0,
   "instances": 1,
