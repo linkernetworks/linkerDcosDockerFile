@@ -32,7 +32,7 @@ echo
 echo
 
 
-echo check to install iot-dashboard(influxdb,grafana,hdfs)
+echo check to install iot-dashboard influxdb,grafana,hdfs
 ./iot-dashboard-install.sh
 echo ------------------------------------------------------------
 echo 

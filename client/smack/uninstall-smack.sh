@@ -1,7 +1,7 @@
 #! /bin/bash
 
 #echo to uninstall zeppelin
-#dcos package uninstall zeppelin
+dcos package uninstall zeppelin
 
 echo 
 echo to uninstall tweeter
