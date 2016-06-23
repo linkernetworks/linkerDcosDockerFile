@@ -31,7 +31,7 @@ route:
 
   # If an alert has successfully been sent, wait 'repeat_interval' to
   # resend them.
-  repeat_interval: 1h
+  repeat_interval: 1m
 
   # A default receiver
   receiver: linker-webhook
