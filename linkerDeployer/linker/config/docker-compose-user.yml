@@ -37,6 +37,7 @@ services:
     privileged: true
     restart: always
     environment:
+     - MARATHON_TASK_LAUNCH_TIMEOUT=900000
      - MARATHON_EVENT_SUBSCRIBER=http_callback
      - "constraint:master==true"
      - "affinity:container!=*marathon*"
