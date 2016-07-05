@@ -29,6 +29,8 @@ services:
 
   marathon:
     image: linkerrepository/marathon:1.1.1
+    volumes:
+     - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
@@ -51,6 +53,7 @@ services:
      - /usr/local/bin:/usr/local/bin
      - /tmp:/tmp
      - /opt/mesosphere:/opt/mesosphere
+     - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
@@ -66,6 +69,20 @@ services:
      - MESOS_RESOURCES=ports(*):[1025-2180,2182-3887,3889-5049,5052-8079,8082-8180,8182-9999,9999-32000]
      - "constraint:slave==true"
      - "affinity:container!=*mesosslave*"
+  
+  cosmos:
+    image: linkerrepository/cosmos
+    volumes:
+     - /etc/resolv.conf:/etc/resolv.conf
+    network_mode: host
+    env_file: .env
+    depends_on:
+     - marathon
+    privileged: true
+    restart: always
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*cosmos*"
 
   dnsserver:
     image: linkerrepository/linker_mesos_dns:1.0.0
@@ -83,6 +100,8 @@ services:
 
   adminrouter:
     image: linkerrepository/linker_router:1.0.0
+    volumes:
+     - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
     depends_on:
      - genresolvconf
