@@ -13,13 +13,17 @@ dcos package uninstall spark
 ./zk -zk master.mesos:2181 -path /spark_mesos_dispatcher
 
 echo
-cho to uninstall cassandra
+echo to uninstall cassandra
 dcos package uninstall cassandra
 ./zk -zk master.mesos:2181 -path /cassandra-mesos
+# remove empty cassandra group on marathon
+dcos marathon group remove --force cassandra
 
 echo
 echo to uninstall kafka
 dcos package uninstall kafka
+./zk -zk master.mesos:2181 -path /kafka-mesos
+./zk -zk master.mesos:2181 -path /brokers
 
 echo
 echo to uninstall grafana\hdfs\influxdb
