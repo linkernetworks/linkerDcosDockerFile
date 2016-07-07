@@ -1,0 +1,128 @@
+{
+  "name": "iot-dashboard",
+  "description": "iot data dashboard",
+  "created_by_json": true,
+  "group": {
+    "id": "/iot-dashboard",
+    "apps": [
+      {
+        "id": "/iot-dashboard/influxdb",
+        "cpus": 0.1,
+        "mem": 1024,
+        "disk": 0,
+        "instances": 1,
+        "constraints": [
+          [
+            "hostname",
+            "CLUSTER",
+            "influxdbip"
+          ]
+        ],
+        "container": {
+          "type": "DOCKER",
+          "volumes": [
+            {
+              "containerPath": "/data",
+              "hostPath": "/var/influxdb",
+              "mode": "RW"
+            }
+          ],
+          "docker": {
+            "image": "tutum/influxdb",
+            "privileged": false,
+            "network": "BRIDGE",
+            "parameters": [],
+            "forcePullImage": false,
+            "portMappings": [
+              {
+                "containerPort": 8083,
+                "hostPort": 0,
+                "servicePort": 18083,
+                "protocol": "tcp"
+              },
+              {
+                "containerPort": 8086,
+                "hostPort": 0,
+                "servicePort": 18086,
+                "protocol": "tcp"
+              }
+            ]
+          }
+        },
+        "env": {
+          "PRE_CREATE_DB": "iot",
+          "ADMIN_USER": "root",
+          "INFLUXDB_INIT_PWD": "123456"
+        },
+        "labels": {
+          "HAPROXY_GROUP": "linkermgmt"
+        }
+      },
+      {
+        "id": "/iot-dashboard/grafana",
+        "cpus": 0.1,
+        "mem": 1024,
+        "disk": 0,
+        "instances": 1,
+        "constraints": [
+          [
+            "hostname",
+            "CLUSTER",
+            "grafanaip"
+          ]
+        ],
+        "container": {
+          "type": "DOCKER",
+          "volumes": [
+            {
+              "containerPath": "/var/lib/grafana",
+              "hostPath": "/var/grafana",
+              "mode": "RW"
+            }
+          ],
+          "docker": {
+            "image": "grafana/grafana",
+            "privileged": false,
+            "network": "BRIDGE",
+            "parameters": [],
+            "forcePullImage": false,
+            "portMappings": [
+              {
+                "containerPort": 3000,
+                "hostPort": 0,
+                "servicePort": 13000,
+                "protocol": "tcp"
+              }
+            ]
+          }
+        },
+        "env": {
+          "GF_INSTALL_PLUGINS": "grafana-piechart-panel,grafana-simple-json-datasource"
+        },
+        "labels": {
+          "HAPROXY_GROUP": "linkermgmt"
+        }
+      },
+      {
+        "id": "/iot-dashboard/hdfs",
+        "cpus": 0.1,
+        "cmd": "p9100=`netstat -anp|grep -i listen|grep tcp|grep 9100|wc -l`;p50010=`netstat -anp|grep -i listen|grep tcp|grep 50010|wc -l`;p50020=`netstat -anp|grep -i listen|grep tcp|grep 50020|wc -l`;p50070=`netstat -anp|grep -i listen|grep tcp|grep 50070|wc -l`;if [[ $p9100 -eq 0 && $p50010 -eq 0 && $p50020 -eq 0 && $p50030 -eq 0 ]]; then sed -i '/service sshd start/ ased -i s/:9000/:9100/ /usr/local/hadoop/etc/hadoop/core-site.xml' /etc/bootstrap.sh;sed -i 's/\\$HADOOP_PREFIX\\/sbin\\/start-yarn.sh//' /etc/bootstrap.sh;/etc/bootstrap.sh -d; else echo port conflict; fi",
+        "mem": 1024,
+        "disk": 0,
+        "instances": 1,
+        "container": {
+          "type": "DOCKER",
+          "volumes": [],
+          "docker": {
+            "image": "sequenceiq/hadoop-docker",
+            "network": "HOST",
+            "privileged": false,
+            "parameters": [],
+            "forcePullImage": false,
+            "portMappings": []
+          }
+        }
+      }
+    ]
+  }
+}

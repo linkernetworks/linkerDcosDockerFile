@@ -1,0 +1,108 @@
+{
+  "name": "iot-dashboard",
+  "description": "iot data dashboard",
+  "created_by_json": true,
+  "group": {
+    "id": "/iot-dashboard",
+    "apps": [
+      {
+        "id": "/iot-dashboard/influxdb",
+        "cpus": 0.1,
+        "mem": 1024,
+        "disk": 0,
+        "instances": 1,
+        "constraints": [
+          [
+            "hostname",
+            "CLUSTER",
+            "172.17.2.94"
+          ]
+        ],
+        "container": {
+          "type": "DOCKER",
+          "volumes": [
+            {
+              "containerPath": "/data",
+              "hostPath": "/var/influxdb",
+              "mode": "RW"
+            }
+          ],
+          "docker": {
+            "image": "tutum/influxdb",
+            "privileged": false,
+            "network": "BRIDGE",
+            "parameters": [],
+            "forcePullImage": false,
+            "portMappings": [
+              {
+                "containerPort": 8083,
+                "hostPort": 0,
+                "servicePort": 18083,
+                "protocol": "tcp"
+              },
+              {
+                "containerPort": 8086,
+                "hostPort": 0,
+                "servicePort": 18086,
+                "protocol": "tcp"
+              }
+            ]
+          }
+        },
+        "env": {
+          "PRE_CREATE_DB": "iot",
+          "ADMIN_USER": "root",
+          "INFLUXDB_INIT_PWD": "123456"
+        },
+        "labels": {
+          "HAPROXY_GROUP": "linkermgmt"
+        }
+      },
+      {
+        "id": "/iot-dashboard/grafana",
+        "cpus": 0.1,
+        "mem": 1024,
+        "disk": 0,
+        "instances": 1,
+        "constraints": [
+          [
+            "hostname",
+            "CLUSTER",
+            "172.17.2.99"
+          ]
+        ],
+        "container": {
+          "type": "DOCKER",
+          "volumes": [
+            {
+              "containerPath": "/var/lib/grafana",
+              "hostPath": "/var/grafana",
+              "mode": "RW"
+            }
+          ],
+          "docker": {
+            "image": "grafana/grafana",
+            "privileged": false,
+            "network": "BRIDGE",
+            "parameters": [],
+            "forcePullImage": false,
+            "portMappings": [
+              {
+                "containerPort": 3000,
+                "hostPort": 0,
+                "servicePort": 13000,
+                "protocol": "tcp"
+              }
+            ]
+          }
+        },
+        "env": {
+          "GF_INSTALL_PLUGINS": "grafana-piechart-panel,grafana-simple-json-datasource"
+        },
+        "labels": {
+          "HAPROXY_GROUP": "linkermgmt"
+        }
+      }
+    ]
+  }
+}

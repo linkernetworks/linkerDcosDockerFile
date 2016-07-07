@@ -1,0 +1,9 @@
+{
+    "brokers": {
+        "count": 3,
+        "mem": 256,
+        "cpus": 0.1
+    },
+    "kafka":{
+    }
+}
