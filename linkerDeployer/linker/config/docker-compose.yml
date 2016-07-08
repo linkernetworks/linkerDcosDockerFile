@@ -17,7 +17,7 @@ services:
     command: /entrypoint.sh
     env_file: .env
     volumes:
-     - /var/lib/mesos/:/var/lib/mesos
+     - /var/lib/mesos:/var/lib/mesos
     depends_on:
      - zookeeper
     privileged: true
