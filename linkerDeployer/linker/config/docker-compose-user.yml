@@ -173,7 +173,7 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock:rw
     - /:/rootfs:ro
     - /sys:/sys:ro
-    - /tmp/mesos:/tmp/mesos:ro
+    - /var/lib/mesos/slave:/tmp/mesos:ro
     - /var/run:/var/run:rw
     - /var/lib/docker:/var/lib/docker:ro
     network_mode: host
