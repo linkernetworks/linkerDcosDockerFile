@@ -157,8 +157,9 @@ services:
     image: linkerrepository/linkerdcos_client:latest
     network_mode: host
     volumes:
-    - /linker/docker:/linker/docker
-    - /var/log:/var/log
+     - /etc/resolv.conf:/etc/resolv.conf
+     - /linker/docker:/linker/docker
+     - /var/log:/var/log
     env_file: .env
     privileged: true
     restart: always
@@ -175,7 +176,7 @@ services:
   genresolvconf:
     image: linkerrepository/linker_resolver:1.0.0
     volumes:
-    - /etc/resolv.conf:/etc/resolv.conf
+     - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
     env_file: .env
     depends_on:
@@ -188,12 +189,12 @@ services:
   cadvisormonitor:
     image: linkerrepository/linker_cadvisor:1.0.0
     volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:rw
-    - /:/rootfs:ro
-    - /sys:/sys:ro
-    - /var/lib/mesos/slave:/tmp/mesos:ro
-    - /var/run:/var/run:rw
-    - /var/lib/docker:/var/lib/docker:ro
+     - /var/run/docker.sock:/var/run/docker.sock:rw
+     - /:/rootfs:ro
+     - /sys:/sys:ro
+     - /var/lib/mesos/slave:/tmp/mesos:ro
+     - /var/run:/var/run:rw
+     - /var/lib/docker:/var/lib/docker:ro
     network_mode: host
     env_file: .env
     privileged: true
