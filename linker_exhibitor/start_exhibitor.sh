@@ -10,7 +10,8 @@ fi
 HOSTNAME=`ip addr show $ENNAME|grep "inet.*brd.*$ENNAME"|awk '{print $2}'|awk -F/ '{print $1}'`
 
 # findout servers from ZOOKEEPERLIST
-IFS=',' read -r -a ZOOKEEPER_LIST <<< "${ZOOKEEPERLIST%:2888:3888}"
+IFS=',' read -r -a ZOOKEEPER_LIST <<< "${ZOOKEEPERLIST}"
+STATIC_ENSEMBLE_SIZE=${#ZOOKEEPER_LIST[@]}
 STATIC_ENSEMBLE=
 
 # generate default conf
@@ -34,13 +35,13 @@ election-port=3888
 zoo-cfg-extra=tickTime\=2000&initLimit\=10&syncLimit\=5&quorumListenOnAllIPs\=true&maxClientCnxns\=0&autopurge.snapRetainCount\5&autopurge.purgeInterval\=6
 auto-manage-instances-settling-period-ms=0
 auto-manage-instances=1
-auto-manage-instances-fixed-ensemble-size=${#ZOOKEEPER_LIST[@]}
+auto-manage-instances-fixed-ensemble-size=${STATIC_ENSEMBLE_SIZE}
 EOF
 
-for server in "${ZOOKEEPER_LIST[@]}"
+for (( i=0; i<${STATIC_ENSEMBLE_SIZE}; i++));
 do
    # do whatever on $i
-   STATIC_ENSEMBLE=${server}:${server},${STATIC_ENSEMBLE}
+   STATIC_ENSEMBLE=${i}:${ZOOKEEPER_LIST[$i]%:2888:3888},${STATIC_ENSEMBLE}
 done
 
 # removing leading and tailing comma
