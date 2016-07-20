@@ -23,7 +23,7 @@ if [[ -n $attrLabel ]]; then
    if [[ -n $value ]]; then
      export MESOS_ATTRIBUTES=$value
    fi
-   if [[ $value =~ "public_ip:true" ]]; then
+   if [[ $value =~ "lb:enable" ]]; then
    	 export MESOS_DEFAULT_ROLE="slave_public"
    	 export MESOS_RESOURCES="ports(*):[1-21,23-5050,5052-9999,10001-32000]"
    else 
