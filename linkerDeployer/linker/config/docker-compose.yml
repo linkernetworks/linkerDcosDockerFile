@@ -6,7 +6,7 @@ services:
     env_file: .env
     volumes:
      - /opt/zookeeper/snapshot:/opt/zookeeper/snapshot
-     - /opt/zookeeper/transactions:/opt/zookeeper/
+     - /opt/zookeeper/transactions:/opt/zookeeper/transactions
     privileged: true
     restart: always
     environment:

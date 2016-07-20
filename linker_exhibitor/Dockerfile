@@ -7,7 +7,7 @@ ENV \
 RUN \
 	# install zookeeper
 	curl -Lo /tmp/zookeeper.tgz $ZK_RELEASE \
-	&& mkdir -p /opt/zookeeper/transactions /opt/zookeeper/snapshots \
+	&& mkdir -p /opt/zookeeper/transactions /opt/zookeeper/snapshot \
 	&& tar -xzf /tmp/zookeeper.tgz -C /opt/zookeeper --strip=1 \
 	&& rm /tmp/zookeeper.tgz \
 
