@@ -119,7 +119,7 @@ services:
 
 
   prometheus:
-    image: prom/prometheus:0.17.0
+    image: prom/prometheus:v1.0.0
     network_mode: host
     entrypoint: /bin/prometheus
     command: -alertmanager.url=http://localhost:9093 -config.file=/etc/prometheus/prometheus.yml
@@ -133,7 +133,7 @@ services:
      - "affinity:container!=*prometheus*"
 
   alertmanager:
-    image: prom/alertmanager:stable
+    image: prom/alertmanager:v0.3.0
     network_mode: host
     volumes:
     - /linker/alertmanager:/etc/alertmanager

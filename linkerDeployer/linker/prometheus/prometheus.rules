@@ -1,72 +1,82 @@
 ALERT HighConnectSessionAlert
   IF container_current_session_high_result > 0
   FOR 15s
-  WITH {}
-  SUMMARY "HighConnectSessionAlert"
-  DESCRIPTION "HighConnectSessionAlert for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+  ANNOTATIONS {
+    summary = "HighConnectSessionAlert",
+    description = "HighConnectSessionAlert for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})",
+  }
 
 ALERT LowConnectSessionAlert
   IF container_current_session_low_result < 0
   FOR 1m
-  WITH {}
-  SUMMARY "LowConnectSessionAlert"
-  DESCRIPTION "LowConnectSessionAlert for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+  ANNOTATIONS {
+    summary = "LowConnectSessionAlert",
+    description = "LowConnectSessionAlert for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})",
+  }
 
 ALERT HighRevPackagesAlert
   IF container_network_receive_packets_per_second_total_high_result > 1
   FOR 15s
-  WITH {}
-  SUMMARY "HighRevPackagesAlert"
-  DESCRIPTION "HighRevPackagesAlert for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+  ANNOTATIONS {
+    summary = "HighRevPackagesAlert",
+    description = "HighRevPackagesAlert for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})",
+  }
 
 ALERT LowRevPackagesAlert
   IF container_network_receive_packets_per_second_total_low_result < 1
   FOR 1m
-  WITH {}
-  SUMMARY "LowRevPackagesAlert"
-  DESCRIPTION "LowRevPackagesAlert for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+  ANNOTATIONS {
+    summary = "LowRevPackagesAlert",
+    description = "LowRevPackagesAlert for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})",
+  }
 
 ALERT HighMemoryAlert
   IF container_memory_usage_high_result > 1
   FOR 20s
-  WITH {}
-  SUMMARY "High Memory usage alert for container"
-  DESCRIPTION "High Memory usage for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+  ANNOTATIONS {
+    summary = "High Memory usage alert for container",
+    description = "High Memory usage for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})",
+  }
  
 
 ALERT LowMemoryAlert
   IF container_memory_usage_low_result < 1
   FOR 1m
-  WITH {}
-  SUMMARY "Low Memory usage alert for container"
-  DESCRIPTION "Low Memory usage for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+  ANNOTATIONS {
+    summary = "Low Memory usage alert for container",
+    description = "Low Memory usage for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})",
+  }
 
 ALERT HighCPUAlert
   IF container_cpu_usage_high_result > 1
   FOR 20s
-  WITH {}
-  SUMMARY "High CPU usage alert for container"
-  DESCRIPTION "High CPU usage for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+  ANNOTATIONS {
+    summary = "High CPU usage alert for container",
+    description = "High CPU usage for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})",
+  }
 
 
 ALERT LowCPUAlert
   IF container_cpu_usage_low_result < 1
   FOR 1m
-  WITH {}
-  SUMMARY "Low CPU usage alert for container"
-  DESCRIPTION "Low CPU usage for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+  ANNOTATIONS {
+    summary = "Low CPU usage alert for container",
+    description = "Low CPU usage for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})",
+  }
 
 ALERT HighTransmitPackageNumberAlert
   IF container_transmit_package_number_high_result > 1
   FOR 20s
-  WITH {}
-  SUMMARY "High Transmit Package Number alert for container"
-  DESCRIPTION "High Transmit Package Number for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+  ANNOTATIONS {
+    summary = "High Transmit Package Number alert for container",
+    description = "High Transmit Package Number for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})",
+  }
 
 
 ALERT LowTransmitPackageNumberAlert
   IF container_transmit_package_number_low_result < 1
   FOR 1m
-  WITH {}
-  SUMMARY "Low Transmit Package Number alert for container"
-  DESCRIPTION "Low Transmit Package Number for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})"
+  ANNOTATIONS {
+    summary = "Low Transmit Package Number alert for container",
+    description = "Low Transmit Package Number for linker container on {{$labels.image}} for container {{$labels.name}} (current value: {{$value}})",
+  }

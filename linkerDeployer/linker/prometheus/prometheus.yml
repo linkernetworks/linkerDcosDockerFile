@@ -10,8 +10,8 @@ rule_files:
 scrape_configs:
 - job_name: prometheus
   scrape_interval: 5s
-  scrape_timeout: 10s 
+  scrape_timeout: 4s 
 
-  target_groups:
+  static_configs:
     # These endpoints are scraped via HTTP.
     - targets: ['192.168.10.71:10000','192.168.10.70:10000']
