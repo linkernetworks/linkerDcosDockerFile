@@ -1,0 +1,19 @@
+FROM linkerrepository/linker_centos:7
+
+ADD pakchois-0.4-10.el7.x86_64.rpm /root/pakchois-0.4-10.el7.x86_64.rpm
+ADD neon-0.30.0-3.el7.x86_64.rpm /root/neon-0.30.0-3.el7.x86_64.rpm
+ADD apr-1.4.8-3.el7.x86_64.rpm /root/apr-1.4.8-3.el7.x86_64.rpm
+ADD apr-util-1.5.2-6.el7.x86_64.rpm /root/apr-util-1.5.2-6.el7.x86_64.rpm
+ADD subversion-libs-1.7.14-10.el7.x86_64.rpm /root/subversion-libs-1.7.14-10.el7.x86_64.rpm
+ADD subversion-1.7.14-10.el7.x86_64.rpm /root/subversion-1.7.14-10.el7.x86_64.rpm
+ADD cyrus-sasl-md5-2.1.26-20.el7_2.x86_64.rpm /root/cyrus-sasl-md5-2.1.26-20.el7_2.x86_64.rpm
+ADD mesos-0.28.1-2.0.20.centos701406.x86_64.rpm /root/mesos-0.28.1-2.0.20.centos701406.x86_64.rpm
+ADD tcl-8.5.13-8.el7.x86_64.rpm /root/tcl-8.5.13-8.el7.x86_64.rpm
+ADD expect-5.45-14.el7_1.x86_64.rpm /root/expect-5.45-14.el7_1.x86_64.rpm
+
+ADD configSlave.sh /root/configSlave.sh
+RUN chmod +x /root/configSlave.sh
+
+WORKDIR /root/
+
+ENTRYPOINT ["/root/configSlave.sh"] 

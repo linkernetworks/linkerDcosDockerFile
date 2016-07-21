@@ -13,4 +13,5 @@ finalHost=$hostNamePrefix$finalHost
 #export MARATHON_HOSTNAME=`eval echo '$'$finalHost`
 export MARATHON_HOSTNAME=$localip
 
-marathon
+#--no-logger dose not mean that do not log, but means do not log to syslog
+marathon --no-logger
