@@ -71,6 +71,7 @@ services:
      - MESOS_LOG_DIR=/var/log/mesos
      - MESOS_WORK_DIR=/var/lib/mesos/slave
      - MESOS_LOGGING_LEVEL=INFO
+     - MESOS_RESOURCES="ports(*):[1025-2180,2182-3887,3889-5049,5052-8079,8082-8180,8182-9999,9999-32000]"
      - MESOS_EXECUTOR_REGISTRATION_TIMEOUT=15mins
      - "constraint:slave==true"
      - "affinity:container!=*mesosslave*"
