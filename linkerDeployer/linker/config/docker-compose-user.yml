@@ -12,7 +12,7 @@ services:
      - "affinity:container!=*zookeeper*"
 
   mesosmaster:
-    image: linkerrepository/mesos-master:0.28.1
+    image: linkerrepository/mesos-master:0.28.1-1.1.1
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
@@ -46,7 +46,7 @@ services:
 
 
   mesosslave:
-    image: linkerrepository/mesos-slave:0.28.1
+    image: linkerrepository/mesos-slave:0.28.1-1.1.1
     volumes:
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /var/run/docker.sock:/var/run/docker.sock
