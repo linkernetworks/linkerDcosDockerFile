@@ -24,8 +24,8 @@ if [[ -n $attrLabel ]]; then
      export MESOS_ATTRIBUTES=$value
    fi
    if [[ $value =~ "lb:enable" ]]; then
-   	 # export MESOS_DEFAULT_ROLE="slave_public"
-   	 export MESOS_RESOURCES="ports(*):[1-21,23-5050,5052-9999,10001-32000]"
+   	 export MESOS_DEFAULT_ROLE="slave_public"
+   	 export MESOS_RESOURCES="ports(slave_public):[1-21,23-5050,5052-9999,10001-32000]"
    else 
    	 export MESOS_RESOURCES="ports(*):[1025-2180,2182-3887,3889-5049,5052-8079,8082-8180,8182-9999, 10001-32000]"
    fi

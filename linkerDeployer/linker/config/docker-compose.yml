@@ -42,6 +42,7 @@ services:
     restart: always
     environment:
      - MARATHON_TASK_LAUNCH_TIMEOUT=900000
+     - MARATHON_MESOS_ROLE=slave_public
      - "constraint:master==true"
      - "affinity:container!=*marathon*"
 
