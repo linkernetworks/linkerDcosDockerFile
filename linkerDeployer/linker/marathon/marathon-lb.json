@@ -16,6 +16,7 @@
 			"instances": 3,
 			"cpus": 0.1,
 			"mem": 512,
+			"acceptedResourceRoles":["slave_public"],
 			"args": [
 				"sse",
 				"-m",
