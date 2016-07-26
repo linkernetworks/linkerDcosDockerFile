@@ -207,7 +207,7 @@ services:
       - "affinity:container!=*cadvisormonitor*"
 
   webconsole:
-    image: linkerrepository/linker_cadvisor:latest
+    image: linkerrepository/linker_webconsole:latest
     volumes:
      - /linker/docker/${CLUSTER_OWNER}/${CLUSTER_NAME}/certs:/usr/local/bin/certs:ro
     network_mode: host
