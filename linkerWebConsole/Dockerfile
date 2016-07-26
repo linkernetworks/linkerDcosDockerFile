@@ -12,6 +12,7 @@ COPY gotty /usr/local/bin/gotty
 COPY gotty.conf /usr/local/bin/gotty.conf
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
+RUN mkdir -p /usr/local/bin/certs
 RUN chmod +x /usr/local/bin/remote-docker-exec /usr/local/bin/gotty /usr/local/bin/entrypoint.sh
 
 EXPOSE 10022
