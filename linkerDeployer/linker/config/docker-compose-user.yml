@@ -163,6 +163,7 @@ services:
      - /etc/resolv.conf:/etc/resolv.conf
      - /linker/docker:/linker/docker
      - /var/log:/var/log
+     - /var/lib/mesos/docker.tar.gz:/var/lib/mesos/docker.tar.gz:ro
     env_file: .env
     privileged: true
     restart: always
