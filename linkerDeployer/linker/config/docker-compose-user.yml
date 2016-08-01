@@ -206,3 +206,18 @@ services:
     environment:
       - "constraint:slave==true"
       - "affinity:container!=*cadvisormonitor*"
+
+  webconsole:
+    image: linkerrepository/linker_webconsole:latest
+    volumes:
+     - /linker/docker/${CLUSTER_OWNER}/${CLUSTER_NAME}/certs/ca.pem:/usr/local/bin/certs/ca.pem:ro
+     - /linker/docker/${CLUSTER_OWNER}/${CLUSTER_NAME}/certs/cert.pem:/usr/local/bin/certs/cert.pem:ro
+     - /linker/docker/${CLUSTER_OWNER}/${CLUSTER_NAME}/certs/key.pem:/usr/local/bin/certs/key.pem:ro
+    network_mode: host
+    env_file: .env
+    privileged: true
+    restart: always
+    command: /usr/local/bin/entrypoint.sh
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*webconsole*"
