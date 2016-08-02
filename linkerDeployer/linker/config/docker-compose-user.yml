@@ -163,7 +163,7 @@ services:
      - /etc/resolv.conf:/etc/resolv.conf
      - /linker/docker:/linker/docker
      - /var/log:/var/log
-     - /root/.docker/config.json:/root/.docker/config.json:ro
+     - /root/.docker:/root/.docker:ro
     env_file: .env
     privileged: true
     restart: always
@@ -210,9 +210,7 @@ services:
   webconsole:
     image: linkerrepository/linker_webconsole:latest
     volumes:
-     - /linker/docker/${CLUSTER_OWNER}/${CLUSTER_NAME}/certs/ca.pem:/usr/local/bin/certs/ca.pem:ro
-     - /linker/docker/${CLUSTER_OWNER}/${CLUSTER_NAME}/certs/cert.pem:/usr/local/bin/certs/cert.pem:ro
-     - /linker/docker/${CLUSTER_OWNER}/${CLUSTER_NAME}/certs/key.pem:/usr/local/bin/certs/key.pem:ro
+     - /linker/docker/${CLUSTER_OWNER}/${CLUSTER_NAME}/certs:/usr/local/bin/certs:ro
     network_mode: host
     env_file: .env
     privileged: true
