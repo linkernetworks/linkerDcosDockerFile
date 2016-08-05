@@ -32,11 +32,11 @@ echo $newline
 # newline
 # $newline
 
-sed -i "s/mongod\.product\.uri=.*/${newline}/" /usr/local/bin/cluster_mgmt.properties
+sed -i "s/mongod\.product\.uri=.*/${newline}/" /linker/cluster_mgmt.properties
 
-tail /usr/local/bin/cluster_mgmt.properties
+tail /linker/cluster_mgmt.properties
 
 # start
 # DO NOT USE nohup
-/usr/local/bin/cluster_mgmt -config=/usr/local/bin/cluster_mgmt.properties
+/linker/cluster_mgmt -config=/linker/cluster_mgmt.properties
 

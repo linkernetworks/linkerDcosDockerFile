@@ -27,8 +27,8 @@ echo $newline
 # newline
 # $newline
 
-sed -i "s/mongod\.product\.uri=.*/${newline}/" /usr/local/bin/usermgmt.properties
+sed -i "s/mongod\.product\.uri=.*/${newline}/" /linker/usermgmt.properties
 
-tail /usr/local/bin/usermgmt.properties
+tail /linker/usermgmt.properties
 
-/usr/local/bin/usermgmt --config=/usr/local/bin/usermgmt.properties 
+/linker/usermgmt --config=/linker/usermgmt.properties 

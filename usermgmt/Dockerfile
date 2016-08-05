@@ -1,7 +1,7 @@
 FROM centos:7
 MAINTAINER qye@linkernetworks.com
 
-ENV USERMGMT_DIR /usr/local/bin
+ENV USERMGMT_DIR /linker
 
 ENV VERSION 1.0
 
@@ -30,5 +30,5 @@ RUN chmod 755 $USERMGMT_DIR/entrypoint.sh
 
 VOLUME ["/var/log"]
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/linker/entrypoint.sh"]
 
