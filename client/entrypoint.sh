@@ -43,11 +43,11 @@ echo $newline
 # newline
 # $newline
 
-sed -i "s/mongod\.product\.uri=.*/${newline}/" /usr/local/bin/dcos_client.properties
+sed -i "s/mongod\.product\.uri=.*/${newline}/" /linker/dcos_client.properties
 
-tail /usr/local/bin/dcos_client.properties
+tail /linker/dcos_client.properties
 
 # start
 # DO NOT USE nohup
-/usr/local/bin/dcos_client -config=/usr/local/bin/dcos_client.properties
+/linker/dcos_client -config=/linker/dcos_client.properties
 
