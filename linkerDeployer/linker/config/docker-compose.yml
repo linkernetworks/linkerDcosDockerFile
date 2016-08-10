@@ -88,6 +88,8 @@ services:
 
   adminrouter:
     image: linkerrepository/linker_router:1.0.0
+    volumes:
+    - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
     depends_on:
      - genresolvconf
