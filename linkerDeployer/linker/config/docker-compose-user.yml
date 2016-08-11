@@ -170,8 +170,8 @@ services:
     depends_on:
      - mongodb
      - dnsserver
-    entrypoint: /usr/local/bin/dbcheck.sh
-    command: /usr/local/bin/entrypoint.sh
+    entrypoint: /linker/dbcheck.sh
+    command: /linker/entrypoint.sh
     environment:
      - "constraint:master==true"
      - "constraint:dcosclient==true"
