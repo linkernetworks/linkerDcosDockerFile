@@ -14,7 +14,7 @@ services:
      - "affinity:container!=*exhibitor*"
 
   mesosmaster:
-    image: linkerrepository/mesos-master:0.28.1
+    image: linkerrepository/mesos-master:0.28.1-1.1.2
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
@@ -51,7 +51,7 @@ services:
 
 
   mesosslave:
-    image: linkerrepository/mesos-slave:0.28.1
+    image: linkerrepository/mesos-slave:0.28.1-1.1.2
     volumes:
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /var/run/docker.sock:/var/run/docker.sock
@@ -157,7 +157,7 @@ services:
      - "affinity:container!=*mongodb*"
 
   dcosclient:
-    image: linkerrepository/linkerdcos_client:latest
+    image: linkerrepository/linkerdcos_client:1.1.2
     network_mode: host
     volumes:
      - /etc/resolv.conf:/etc/resolv.conf
@@ -208,7 +208,7 @@ services:
       - "affinity:container!=*cadvisormonitor*"
 
   webconsole:
-    image: linkerrepository/linker_webconsole:latest
+    image: linkerrepository/linker_webconsole:1.1.2
     volumes:
      - /linker/docker/${CLUSTER_OWNER}/${CLUSTER_NAME}/certs:/usr/local/bin/certs:ro
     network_mode: host
