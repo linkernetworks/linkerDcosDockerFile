@@ -12,21 +12,23 @@ createUserPwd() {
     RET=$?
   done
 
-  echo "Creating mgmt user: rootadmin for repl ..."
-  local cmd1="db.createUser({ user: '$ADMINUSER', pwd: '$PASS', roles: [ { role:'$ADMINROLE', db: '$ADMINDB' } ] }); quit();"
-  local newcmd1=$cmd1
-  mongo $ADMINDB --eval "$newcmd1"
-
   echo "config system.version.authSchema to 3"
   local cmd="var schema=db.system.version.findOne({'_id' : 'authSchema'}); schema.currentVersion=3; db.system.version.save(schema); quit();"
   local newcmd=$cmd
   mongo $ADMINDB --eval "$newcmd"
 
   #Create USER
-  echo "Creating user: \"$USER\" ..."
-  cmd="db.createUser({user:'$USER', pwd:'$PASS', roles: [ { role:'$ROLE', db:'$DB'}]}); quit();"
-  newcmd=$cmd
-  mongo $DB --eval "$newcmd"
+  echo "Start to check whether the user is exist ..."
+  temp=$(mongo admin --eval "db.system.users.findOne({'user': '$USER','db': '$DB'},{'_id':1})" | tail -n 1)
+  echo $temp
+  check="null"
+  if [ "$temp" = "$check" ]
+  then echo "User is not exist, start to creating user: \"$USER\" ..."
+    cmd="db.createUser({user:'$USER', pwd:'$PASS', roles: [ { role:'$ROLE', db:'$DB'}]}); quit();"
+    newcmd=$cmd
+    mongo $DB --eval "$newcmd"
+  else echo "user has already exist"
+  fi
 
   #Shutdown MongoDb
   /usr/bin/mongod --dbpath /data/db --shutdown
