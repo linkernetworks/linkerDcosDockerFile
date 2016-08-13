@@ -5,6 +5,7 @@ MAINTAINER ychen <ychen@linkernetworks.com>
 RUN curl -sSL https://s3-ap-southeast-1.amazonaws.com/docker-engine/default/docker-install.sh | sh -
 
 #RUN systemctl stop docker.service && systemctl disable docker.service
+RUN apt-get install curl -y && apt-get install libcurl3-nss -y
 
 RUN mv /usr/lib/libmesos-0.28.1.so /usr/lib/libmesos-0.28.1.so.old && \
 	mv /usr/lib/libmesos.la /usr/lib/libmesos.la.old && \
