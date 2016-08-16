@@ -19,12 +19,12 @@ RUN mv /usr/lib/libmesos-0.28.1.so /usr/lib/libmesos-0.28.1.so.old && \
 	chmod +x /usr/lib/*.la && \
 	chmod +x /usr/lib/mesos/modules/*.la
 
-ADD post_launch_docker_hook.json /usr/local/bin/post_launch_docker_hook.json
-ADD linkerconfig /usr/local/bin/linkerconfig
+ADD post_launch_docker_hook.json /opt/post_launch_docker_hook.json
+ADD linkerconfig /opt/linkerconfig
 
-RUN chmod +x /usr/local/bin/linkerconfig
+RUN chmod +x /opt/linkerconfig
 
-ENV MESOS_MODULES file:///usr/local/bin/post_launch_docker_hook.json
+ENV MESOS_MODULES file:///opt/post_launch_docker_hook.json
 ENV MESOS_HOOKS org_apache_mesos_PostLaunchDockerHook
 
 EXPOSE 5051
