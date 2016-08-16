@@ -13,4 +13,7 @@ expect ":"
 send $user\r
 expect "Password:"
 send $pwd\r
-expect "Login Succeeded"
+expect {
+	"Login Succeeded" exit 0
+}
+exit 1
