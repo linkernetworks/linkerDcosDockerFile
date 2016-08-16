@@ -1,0 +1,22 @@
+{
+  "libraries": [
+    {
+      "file": "/usr/lib/mesos/modules/libpostlaunchdockerhook.so",
+      "modules": [
+        {
+          "name": "org_apache_mesos_PostLaunchDockerHook",
+          "parameters": [
+            {
+              "key": "cmd",
+              "value": "/usr/local/bin/linkerconfig"
+            },
+            {
+              "key": "hostproc",
+              "value": "/mnt/proc"
+            }	
+          ]
+        }
+      ]
+    }
+  ]
+}

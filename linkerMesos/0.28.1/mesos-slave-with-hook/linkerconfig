@@ -1,0 +1,10 @@
+#!/bin/bash
+#set -e
+echo $@ >> /tmp/linkerscript.log
+
+hostproc=$1
+dockername=$2
+
+dockerpid=`docker inspect -f "{{ .State.Pid }}" $dockername`
+ln -s $hostproc/$dockerpid /proc/$dockerpid
+
