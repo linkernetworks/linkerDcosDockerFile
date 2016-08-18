@@ -1,6 +1,6 @@
 FROM java:openjdk-8-jdk-alpine
 
-RUN mkdir -p /linker
+RUN mkdir -p /linker /var/lib/cosmos
 WORKDIR /linker
 ADD ./cosmos.jar /linker/
 
