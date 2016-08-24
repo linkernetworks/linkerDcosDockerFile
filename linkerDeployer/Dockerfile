@@ -1,17 +1,17 @@
-From schmunk42/docker-toolbox
+FROM schmunk42/docker-toolbox:latest
 
 MAINTAINER zhangjie0220@gmail.com
 
 WORKDIR /linker
 
 # copy binarys and make them executable
-ADD bin/* /tmp/linker/
+COPY bin/* /tmp/linker/
 RUN chmod +x /tmp/linker/* &&\
     mv /tmp/linker/docker* /opt/local/bin/ &&\
     mv /tmp/linker/entrypoint.sh /entrypoint.sh 
 
 # copy linker components and make binary and shell file executable
-ADD linker /tmp/linker
+COPY linker /tmp/linker
 RUN chmod +x /tmp/linker/bin/* &&\
     mv /tmp/linker/bin/* /linker/ &&\
     mv /tmp/linker/config /linker/ &&\
