@@ -4,6 +4,8 @@ MAINTAINER zhangjie0220@gmail.com
 
 WORKDIR /linker
 
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
 # copy binarys and make them executable
 COPY bin/* /tmp/linker/
 RUN chmod +x /tmp/linker/* &&\
@@ -24,9 +26,4 @@ EXPOSE 10003
 #Expose the config and log folder
 VOLUME ["/linker/docker","/linker/swarm","/var/log"]
 
-#ENTRYPOINT ["/linker/dcos_deploy"]
-
-#CMD ["-config=/linker/config/dcos_deploy.properties", "2>&1"]
-
-ENTRYPOINT ["/bin/bash"]
 CMD ["/entrypoint.sh"]
