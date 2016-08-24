@@ -1,5 +1,5 @@
 FROM linkerrepository/dcos-cli:jdk
-MAINTAINER Yifa Zhang <zyfdegg@gmail.com> 
+MAINTAINER Yifa Zhang <yzhang3@linkernetworks.com>
 
 WORKDIR /linker
 ENV VERSION 1.0

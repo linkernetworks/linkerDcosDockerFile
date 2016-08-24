@@ -1,5 +1,5 @@
 FROM centos:7
-MAINTAINER Yifa Zhang <zyfdegg@gmail.com> 
+MAINTAINER Yifa Zhang <yzhang3@linkernetworks.com>
 
 ENV VERSION 1.0
 ENV CLUSTER_DIR /linker
