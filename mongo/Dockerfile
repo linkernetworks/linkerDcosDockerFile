@@ -1,7 +1,5 @@
 FROM centos:7
 
-# Update CentOS 7
-RUN yum update -y 
 
 # Install packages
 RUN yum install -y unzip wget curl net-tools
