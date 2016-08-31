@@ -1,21 +1,16 @@
 FROM centos:7
-RUN yum -y install epel-release &&\
-	yum -y install nodejs &&\
-	yum -y install unzip
-	
-RUN mkdir -p /opt/linker-dcos-portal/
 
-COPY linker-dcos-portal.zip /opt/linker-dcos-portal/linker-dcos-portal.zip
-COPY init.sh /opt/linker-dcos-portal/init.sh
-
-RUN chmod 755 /opt/linker-dcos-portal/*.sh
+RUN yum install -y epel-release nodejs unzip && \
+	mkdir -p /opt/linker-dcos-portal/
 
 WORKDIR /opt/linker-dcos-portal
+ENV NODE_ENV production
 
 EXPOSE 3000
-
 VOLUME ["/var/log"]
 
-ENV NODE_ENV production
+COPY init.sh /opt/linker-dcos-portal/init.sh
+COPY linker-dcos-portal.zip /opt/linker-dcos-portal/linker-dcos-portal.zip
+RUN chmod 755 /opt/linker-dcos-portal/*.sh
 
 ENTRYPOINT /opt/linker-dcos-portal/init.sh
