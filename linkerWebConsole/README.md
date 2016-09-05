@@ -21,6 +21,22 @@ Example:
 docker run -d -p 8080:10022 -v /linker/docker/sysadmin/cluster3/certs:/usr/local/bin/certs linkerrepository/linker_webconsole
 ```
 
+# Gotty TLS
+Different from certs for docker daemon or swarm, gotty use seperate certification files.
+`gotty.crt`, `gotty.ca.crt` and `gotty.key` are certs for gotty.
+
+To enable secure websocket connection for gotty, simply clone this repo and
+
+1. fullfill gotty.crt, gotty.key and gotty.ca.crt
+2. switch option `enable_tls` to true in `gotty.conf`
+3. build image locally and push it to a PRIVATE registry
+
+If no private registry available, `docker save` and `docker load` image manually, and restart container manually.
+
+**NEVER PUSH ANY CHANGES OF CERTIFICATION FILES TO GITHUB!**
+
+**NEVER PUSH IMAGE CONTAINING CERTIFICATION FILES TO DOCKERHUB!**
+
 # Related projects
 [LinkerNetworks/gotty][1]: Linker GoTTY is a simple command line tool that turns remote-docker-exec into web applications.
 
