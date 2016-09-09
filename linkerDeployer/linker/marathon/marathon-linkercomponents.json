@@ -31,7 +31,7 @@
                 }
               ],
               "privileged": true,
-              "forcePullImage": true
+              "forcePullImage": false
             },
             "volumes": [
               {
@@ -78,7 +78,7 @@
                 }
               ],
               "privileged": true,
-              "forcePullImage": true
+              "forcePullImage": false
             },
             "volumes": [
               {
@@ -110,7 +110,7 @@
               "image": "linkerrepository/linkerdcos_mongodb_repl:1.0.1",
               "network": "HOST",
               "privileged": true,
-              "forcePullImage": true
+              "forcePullImage": false
             },
             "volumes": [
               {
@@ -162,7 +162,7 @@
               ],
               "image": "linkerrepository/linker_dcos_portal:1.1.2",
               "privileged": true,
-              "forcePullImage": true
+              "forcePullImage": false
             },
             "volumes": [
               {
@@ -202,7 +202,7 @@
                 }
               ],
               "privileged": true,
-              "forcePullImage": true
+              "forcePullImage": false
             },
             "volumes": [
               {
@@ -250,7 +250,7 @@
               ],
               "image": "linkerrepository/linker_dcos_deployer:1.1.2",
               "privileged": true,
-              "forcePullImage": true
+              "forcePullImage": false
             },
             "volumes": [
               {
