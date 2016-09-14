@@ -75,9 +75,9 @@ services:
      - MESOS_EXECUTOR_REGISTRATION_TIMEOUT=15mins
      - "constraint:slave==true"
      - "affinity:container!=*mesosslave*"
-  
+
   cosmos:
-    image: linkerrepository/cosmos
+    image: linkerrepository/cosmos:0.2.0
     volumes:
      - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
@@ -103,6 +103,36 @@ services:
     environment:
      - "constraint:master==true"
      - "affinity:container!=*dnsserver*"
+
+  universenginx:
+    image: linkerrepository/universe:latest
+    env_file: .env
+    command: nginx -g "daemon off;"
+    ports:
+     - "8082:80"
+    depends_on:
+     - dnsserver
+    privileged: true
+    restart: always
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*universenginx*"
+
+  universeregistry:
+    image: linkerrepository/universe:latest
+    env_file: .env
+    command: registry serve /etc/docker/registry/config.yml
+    ports:
+     - "5000:5000"
+    depends_on:
+     - dnsserver
+    privileged: true
+    restart: always
+    environment:
+     - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
+     - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
+     - "constraint:master==true"
+     - "affinity:container!=*universeregistry*"
 
   adminrouter:
     image: linkerrepository/linker_router:1.0.0
