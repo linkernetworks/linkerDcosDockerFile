@@ -108,6 +108,7 @@ services:
     image: linkerrepository/universe:latest
     env_file: .env
     command: nginx -g "daemon off;"
+    network_mode: bridge
     ports:
      - "8082:80"
     depends_on:
@@ -122,6 +123,7 @@ services:
     image: linkerrepository/universe:latest
     env_file: .env
     command: registry serve /etc/docker/registry/config.yml
+    network_mode: bridge
     ports:
      - "5000:5000"
     depends_on:
