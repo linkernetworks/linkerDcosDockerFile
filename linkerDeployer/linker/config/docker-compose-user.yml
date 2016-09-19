@@ -77,7 +77,7 @@ services:
      - "affinity:container!=*mesosslave*"
 
   cosmos:
-    image: linkerrepository/cosmos:0.2.0
+    image: linkerrepository/cosmos:0.1.5
     volumes:
      - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
