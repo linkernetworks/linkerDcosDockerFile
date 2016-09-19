@@ -12,7 +12,8 @@ ENV MESOS_CONTAINERIZERS docker,mesos
 ENV MESOS_LOG_DIR /var/log/mesos
 
 ADD entrypoint.sh /
-RUN chmod +x /entrypoint.sh
+ADD detect_ip /
+RUN chmod +x /entrypoint.sh /detect_ip
 
 VOLUME ["/sys/fs/cgroup", "/var/run/docker.sock", "/tmp", "/opt/mesosphere", "/var/log/mesos"]
 
