@@ -2,29 +2,34 @@ FROM linkerrepository/mesos:0.28.1
 MAINTAINER ychen <ychen@linkernetworks.com>
 
 # install docker using default installation script
-RUN curl -sSL https://s3-ap-southeast-1.amazonaws.com/docker-engine/default/docker-install.sh | sh -
+RUN curl -sSL https://s3-ap-southeast-1.amazonaws.com/docker-engine/v1.12.0/docker-install.sh | sh -
 
 #RUN systemctl stop docker.service && systemctl disable docker.service
 RUN apt-get install curl -y && apt-get install libcurl3-nss -y
 
-RUN mv /usr/lib/libmesos-0.28.1.so /usr/lib/libmesos-0.28.1.so.old && \
-	mv /usr/lib/libmesos.la /usr/lib/libmesos.la.old && \
-	curl -o /usr/lib/libmesos-0.28.1.so -sSL https://s3-ap-southeast-1.amazonaws.com/linkerdcos/mesos-slave/libmesos-0.28.1.so && \
-	curl -o /usr/lib/libmesos.la -sSL https://s3-ap-southeast-1.amazonaws.com/linkerdcos/mesos-slave/libmesos.la && \
-	curl -o /usr/lib/mesos/modules/libpostlaunchdockerhook-0.28.1.so -sSL https://s3-ap-southeast-1.amazonaws.com/linkerdcos/mesos-slave/libpostlaunchdockerhook-0.28.1.so && \
-	curl -o /usr/lib/mesos/modules/libpostlaunchdockerhook.la -sSL https://s3-ap-southeast-1.amazonaws.com/linkerdcos/mesos-slave/libpostlaunchdockerhook.la && \
+ADD post_launch_docker_hook.json /opt/post_launch_docker_hook.json
+ADD linkerconfig /opt/linkerconfig
+ADD so/libmesos-0.28.1.so /usr/lib/libmesos-0.28.1.so
+ADD so/libmesos.la /usr/lib/libmesos.la
+ADD so/libpostlaunchdockerhook-0.28.1.so /usr/lib/mesos/modules/libpostlaunchdockerhook-0.28.1.so
+ADD so/libpostlaunchdockerhook.la /usr/lib/mesos/modules/libpostlaunchdockerhook.la
+ADD libexec/mesos-containerizer /usr/libexec/mesos/mesos-containerizer
+ADD libexec/mesos-docker-executor /usr/libexec/mesos/mesos-docker-executor
+ADD libexec/mesos-executor /usr/libexec/mesos/mesos-executor
+ADD libexec/mesos-fetcher /usr/libexec/mesos/mesos-fetcher
+ADD libexec/mesos-health-check /usr/libexec/mesos/mesos-health-check
+ADD libexec/mesos-logrotate-logger /usr/libexec/mesos/mesos-logrotate-logger
+ADD libexec/mesos-usage /usr/libexec/mesos/mesos-usage
+
+RUN chmod +x /opt/linkerconfig && \
 	ln -s /usr/lib/mesos/modules/libpostlaunchdockerhook-0.28.1.so /usr/lib/mesos/modules/libpostlaunchdockerhook.so && \
 	chmod +x /usr/lib/*.so && \
 	chmod +x /usr/lib/mesos/modules/*.so && \
 	chmod +x /usr/lib/*.la && \
-	chmod +x /usr/lib/mesos/modules/*.la
+	chmod +x /usr/lib/mesos/modules/*.la && \
+	chmod +x /usr/libexec/mesos/*
 
-ADD post_launch_docker_hook.json /usr/local/bin/post_launch_docker_hook.json
-ADD linkerconfig /usr/local/bin/linkerconfig
-
-RUN chmod +x /usr/local/bin/linkerconfig
-
-ENV MESOS_MODULES file:///usr/local/bin/post_launch_docker_hook.json
+ENV MESOS_MODULES file:///opt/post_launch_docker_hook.json
 ENV MESOS_HOOKS org_apache_mesos_PostLaunchDockerHook
 
 EXPOSE 5051

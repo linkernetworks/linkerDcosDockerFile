@@ -8,12 +8,8 @@
           "parameters": [
             {
               "key": "cmd",
-              "value": "/usr/local/bin/linkerconfig"
-            },
-            {
-              "key": "hostproc",
-              "value": "/mnt/proc"
-            }	
+              "value": "/opt/linkerconfig"
+            }
           ]
         }
       ]
