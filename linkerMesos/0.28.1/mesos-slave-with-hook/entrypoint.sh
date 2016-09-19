@@ -1,8 +1,8 @@
 #!/bin/bash
-if [ -z "$ENNAME" ];then
-    ENNAME=eth0
-fi
-localip=`ip addr show $ENNAME|grep "inet.*brd.*$ENNAME"|awk '{print $2}'|awk -F/ '{print $1}'`
+mkdir -p /opt/mesosphere/bin
+mv /detect_ip /opt/mesosphere/bin/
+
+localip=`/opt/mesosphere/bin/detect_ip`
 
 export MESOS_IP=$localip
 export MESOS_HOSTNAME=$localip
