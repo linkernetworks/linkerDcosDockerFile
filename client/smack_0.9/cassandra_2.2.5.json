@@ -1,0 +1,17 @@
+{
+  "service":{
+     "api_port":31001,
+     "cpus":0.1,
+     "mem":1024
+  },
+  "executor":{
+     "api_port":31002,
+     "cpus":0.1,
+     "mem":1024
+  },
+  "nodes":{
+     "cpus":0.1,
+     "mem":1024,
+     "disk":1024
+  }
+}

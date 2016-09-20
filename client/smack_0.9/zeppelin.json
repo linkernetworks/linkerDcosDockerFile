@@ -1,0 +1,6 @@
+{
+  "spark":{
+    "cores_max":"0.1",
+    "executor_memory":"2048M"
+  }
+}
