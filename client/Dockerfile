@@ -4,8 +4,9 @@ MAINTAINER linker <support@linkernetworks.com>
 
 ENV VERSION 1.0
 
-RUN mkdir -p /linker
-RUN mkdir -p /opt/local/bin
+RUN mkdir -p /linker /opt/local/bin &&\
+    apt-get install -y sudo
+
 ENV PATH=/opt/local/bin:$PATH
 
 ADD clientmgmt/dcos_client /linker/dcos_client
@@ -29,7 +30,7 @@ RUN \
 
 # install smack
 RUN mkdir -p /linker/smack
-ADD smack /linker/smack/
+ADD smack_0.9 /linker/smack/
 RUN chmod +x /linker/smack/*.sh
 
 EXPOSE 10004

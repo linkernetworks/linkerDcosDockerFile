@@ -5,11 +5,11 @@
 # MONGODB_NODES examples
 # MONGODB_NODES=172.10.17.101,172.10.17.102,172.10.17.103,172.10.17.104
 # export MONGODB_NODES=172.10.17.101,172.10.17.102,172.10.17.103,172.10.17.104
-
+source ./dcos/bin/env-setup
 if [ -z "$ENNAME" ];then
     ENNAME=eth0
 fi
-localip=`ip addr show $ENNAME|grep "inet.*brd.*$ENNAME"|awk '{print $2}'|awk -F/ '{print $1}'`
+localip=`ip addr show $ENNAME | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1`
 dcos_key="core.dcos_url"
 dcos_value="http://$localip"
 
