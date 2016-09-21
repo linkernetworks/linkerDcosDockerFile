@@ -9,17 +9,18 @@ function gen_serviceurl(service_name)
     return "http://" .. first_ip .. ":" .. first_port
 end
 
-if ngx.var.serviceid == 'sparkcli' then
-    ngx.var.serviceurl = gen_serviceurl('spark')
-    return
+-- Get (cached) Marathon app state.
+local svcapps = common.get_svcapps()
+if svcapps then
+    local svc = svcapps[ngx.var.serviceid]
+    if svc then
+       ngx.var.serviceurl = svc["url"]
+       ngx.var.servicescheme = svc["scheme"]
+       return
+    end
 end
 
-if ngx.var.serviceid:startswith('cassandra') then
-    local split_serviceid = ngx.var.serviceid:split('.')
-    ngx.var.serviceurl = gen_serviceurl(split_serviceid[2] .. '-' .. split_serviceid[1])
-    return
-end
-
+-- Get (cached) Mesos state.
 local state = common.mesos_get_state()
 for _, framework in ipairs(state["frameworks"]) do
     if framework["id"] == ngx.var.serviceid or framework['name'] == ngx.var.serviceid then
