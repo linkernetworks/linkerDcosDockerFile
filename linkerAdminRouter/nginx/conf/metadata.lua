@@ -6,7 +6,7 @@ if not public_ip then
     public_ip = ngx.var.server_addr
 end
 
-local cluster_id = io.open('/etc/mesosphere/cluster-id', 'r')
+local cluster_id = io.open('/var/lib/dcos/cluster-id', 'r')
 
 if cluster_id == nil
 then

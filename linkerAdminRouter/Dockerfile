@@ -2,7 +2,8 @@ FROM linkerrepository/openresty:debian
 MAINTAINER support@linkernetworks.com
 
 # Add dcos-ui
-RUN mkdir -p /opt/mesosphere/active
+RUN mkdir -p /opt/mesosphere/active/dcos-metadata/etc
+COPY contents/dcos-version.json /opt/mesosphere/active/dcos-metadata/etc/dcos-version.json
 COPY contents/dcos-ui /opt/mesosphere/active/dcos-ui
 COPY start.sh /start.sh
 

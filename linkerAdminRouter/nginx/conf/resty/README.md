@@ -9,3 +9,16 @@
 [lua-resty-http-simple](https://github.com/bakins/lua-resty-http-simple)
 commit f54d5a5.
 
+
+# lua-resty-jwt
+
+`evp.lua`, `hmac.lua`, and `jwt.lua` are part of
+[lua-resty-jwt](https://github.com/SkyLothar/lua-resty-jwt) release 0.1.2.
+
+
+# lua-resty-cookie
+
+`cookie.lua` is from
+[lua-resty-cookie](https://github.com/cloudflare/lua-resty-cookie)
+release 0.1.0.
+
