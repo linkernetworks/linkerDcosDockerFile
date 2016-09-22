@@ -1,6 +1,11 @@
 local common = require "common"
 local url = require "url"
 
+if ngx.var.serviceid == 'sparkcli' then
+    ngx.var.serviceurl = gen_serviceurl('spark')
+    return
+end
+
 function gen_serviceurl(service_name)
     local records = common.mesos_dns_get_srv(service_name)
     local first_ip = records[1]['ip']
