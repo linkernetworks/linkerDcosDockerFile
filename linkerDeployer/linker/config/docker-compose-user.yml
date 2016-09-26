@@ -1,18 +1,5 @@
 version: '2'
 services:
-  exhibitor:
-    image: linkerrepository/linker_exhibitor:1.5.6
-    network_mode: host
-    env_file: .env
-    volumes:
-     - /opt/zookeeper/snapshot:/opt/zookeeper/snapshot
-     - /opt/zookeeper/transactions:/opt/zookeeper/transactions
-    privileged: true
-    restart: always
-    environment:
-     - "constraint:master==true"
-     - "affinity:container!=*exhibitor*"
-
   mesosmaster:
     image: linkerrepository/mesos-master:0.28.1-1.1.2-cu
     network_mode: host
@@ -20,8 +7,6 @@ services:
     env_file: .env
     volumes:
      - /var/lib/mesos:/var/lib/mesos
-    depends_on:
-     - exhibitor
     privileged: true
     restart: always
     environment:
@@ -38,8 +23,6 @@ services:
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
-    depends_on:
-     - exhibitor
     privileged: true
     restart: always
     environment:
@@ -63,8 +46,6 @@ services:
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
-    depends_on:
-     - exhibitor
     privileged: true
     restart: always
     environment:
@@ -96,8 +77,6 @@ services:
     - /linker/config:/linker/config
     network_mode: host
     env_file: .env
-    depends_on:
-     - exhibitor
     privileged: true
     restart: always
     environment:

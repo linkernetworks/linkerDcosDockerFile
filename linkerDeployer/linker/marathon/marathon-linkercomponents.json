@@ -20,7 +20,7 @@
           "container": {
             "type": "DOCKER",
             "docker": {
-              "image": "linkerrepository/linkerdcos_clustermgmt:1.1.2-cu",
+              "image": "linkerrepository/linkerdcos_clustermgmt:1.1.2-cu-swarm",
               "network": "BRIDGE",
               "portMappings": [
                 {
@@ -248,7 +248,7 @@
                   "protocol": "tcp"
                 }
               ],
-              "image": "linkerrepository/linker_dcos_deployer:1.1.2-cu",
+              "image": "linkerrepository/linker_dcos_deployer:1.1.2-cu-swarm",
               "privileged": true,
               "forcePullImage": true
             },
