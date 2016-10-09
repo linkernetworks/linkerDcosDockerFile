@@ -1,18 +1,5 @@
 version: '2'
 services:
-  exhibitor:
-    image: linkerrepository/linker_exhibitor:1.5.6
-    network_mode: host
-    env_file: .env
-    volumes:
-     - /opt/zookeeper/snapshot:/opt/zookeeper/snapshot
-     - /opt/zookeeper/transactions:/opt/zookeeper/transactions
-    privileged: true
-    restart: always
-    environment:
-     - "constraint:master==true"
-     - "affinity:container!=*exhibitor*"
-
   mesosmaster:
     image: linkerrepository/mesos-master:0.28.1
     network_mode: host
@@ -20,8 +7,6 @@ services:
     env_file: .env
     volumes:
      - /var/lib/mesos:/var/lib/mesos
-    depends_on:
-     - exhibitor
     privileged: true
     restart: always
     environment:
@@ -38,8 +23,6 @@ services:
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
-    depends_on:
-     - exhibitor
     privileged: true
     restart: always
     environment:
@@ -63,8 +46,6 @@ services:
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
-    depends_on:
-     - exhibitor
     privileged: true
     restart: always
     environment:
@@ -75,9 +56,9 @@ services:
      - MESOS_EXECUTOR_REGISTRATION_TIMEOUT=15mins
      - "constraint:slave==true"
      - "affinity:container!=*mesosslave*"
-  
+
   cosmos:
-    image: linkerrepository/cosmos
+    image: linkerrepository/cosmos:0.1.5
     volumes:
      - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
@@ -96,16 +77,46 @@ services:
     - /linker/config:/linker/config
     network_mode: host
     env_file: .env
-    depends_on:
-     - exhibitor
     privileged: true
     restart: always
     environment:
      - "constraint:master==true"
      - "affinity:container!=*dnsserver*"
 
+  universenginx:
+    image: linkerrepository/universe:latest
+    env_file: .env
+    command: nginx -g "daemon off;"
+    network_mode: bridge
+    ports:
+     - "8082:80"
+    depends_on:
+     - dnsserver
+    privileged: true
+    restart: always
+    environment:
+     - "constraint:master==true"
+     - "affinity:container!=*universenginx*"
+
+  universeregistry:
+    image: linkerrepository/universe:latest
+    env_file: .env
+    command: registry serve /etc/docker/registry/config.yml
+    network_mode: bridge
+    ports:
+     - "5000:5000"
+    depends_on:
+     - dnsserver
+    privileged: true
+    restart: always
+    environment:
+     - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
+     - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
+     - "constraint:master==true"
+     - "affinity:container!=*universeregistry*"
+
   adminrouter:
-    image: linkerrepository/linker_router:1.0.0
+    image: linkerrepository/linker_router:1.0.1
     volumes:
      - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
