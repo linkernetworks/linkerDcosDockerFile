@@ -30,8 +30,7 @@
                   "protocol": "tcp"
                 }
               ],
-              "privileged": true,
-              "forcePullImage": true
+              "privileged": true
             },
             "volumes": [
               {
@@ -77,8 +76,7 @@
                   "protocol": "tcp"
                 }
               ],
-              "privileged": true,
-              "forcePullImage": true
+              "privileged": true
             },
             "volumes": [
               {
@@ -109,8 +107,7 @@
             "docker": {
               "image": "linkerrepository/linkerdcos_mongodb_repl:1.0.1",
               "network": "HOST",
-              "privileged": true,
-              "forcePullImage": true
+              "privileged": true
             },
             "volumes": [
               {
@@ -161,8 +158,7 @@
                 }
               ],
               "image": "linkerrepository/linker_dcos_portal:1.1.2-cu",
-              "privileged": true,
-              "forcePullImage": true
+              "privileged": true
             },
             "volumes": [
               {
@@ -201,8 +197,7 @@
                   "protocol": "tcp"
                 }
               ],
-              "privileged": true,
-              "forcePullImage": true
+              "privileged": true
             },
             "volumes": [
               {
@@ -249,8 +244,7 @@
                 }
               ],
               "image": "linkerrepository/linker_dcos_deployer:1.1.2-cu",
-              "privileged": true,
-              "forcePullImage": true
+              "privileged": true
             },
             "volumes": [
               {
