@@ -74,7 +74,7 @@ startAsMongoMaster() {
 
 createUserPwd() {
 	# Start MongoDB
-  nohup /usr/bin/mongod --dbpath /data/db --nojournal &
+  nohup /usr/bin/mongod --dbpath /data/db &
   # wait until mongo started
   RET=1
   while [[ RET -ne 0 ]]; do
