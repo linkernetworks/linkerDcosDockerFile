@@ -1,7 +1,7 @@
 version: '2'
 services:
   mesosmaster:
-    image: linkerrepository/mesos-master:0.28.1
+    image: linkerrepository/mesos-master:1.0.1
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
@@ -17,7 +17,7 @@ services:
      - "affinity:container!=*mesosmaster*"
 
   marathon:
-    image: linkerrepository/marathon:1.1.1
+    image: linkerrepository/marathon:1.3.0
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
@@ -26,12 +26,14 @@ services:
     environment:
      - MARATHON_TASK_LAUNCH_TIMEOUT=900000
      - MARATHON_MESOS_ROLE=slave_public
+     - MARATHON_MESOS_AUTHENTICATION_PRINCIPAL=dcos_marathon
+     - MESOS_ENABLE_FEATURES=vips,task_killing,external_volumes
      - "constraint:master==true"
      - "affinity:container!=*marathon*"
 
 
   mesosslave:
-    image: linkerrepository/mesos-slave:0.28.1
+    image: linkerrepository/mesos-slave:1.0.1
     volumes:
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /var/run/docker.sock:/var/run/docker.sock
@@ -47,6 +49,10 @@ services:
     environment:
      - MESOS_CONTAINERIZERS=docker,mesos
      - MESOS_LOG_DIR=/var/log/mesos
+     - MESOS_ISOLATION=cgroups/cpu,cgroups/mem,disk/du,network/cni,filesystem/linux,docker/runtime,docker/volume
+     - MESOS_IMAGE_PROVIDERS=docker
+     - MESOS_SLAVE_SUBSYSTEMS=cpu,memory
+     - MESOS_CGROUPS_ENABLE_CFS=true
      - MESOS_WORK_DIR=/var/lib/mesos/slave
      - MESOS_LOGGING_LEVEL=INFO
      - MESOS_EXECUTOR_REGISTRATION_TIMEOUT=15mins
