@@ -1,7 +1,7 @@
 version: '2'
 services:
   mesosmaster:
-    image: linkerrepository/mesos-master:0.28.1-1.1.2-cu
+    image: {registry}/linkerrepository/mesos-master:0.28.1-1.1.2-cu
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
@@ -17,7 +17,7 @@ services:
      - "affinity:container!=*mesosmaster*"
 
   marathon:
-    image: linkerrepository/marathon:1.1.1
+    image: {registry}/linkerrepository/marathon:1.1.1
     volumes:
      - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
@@ -34,7 +34,7 @@ services:
 
 
   mesosslave:
-    image: linkerrepository/mesos-slave:0.28.1-1.1.2-cu
+    image: {registry}/linkerrepository/mesos-slave:0.28.1-1.1.2-cu
     volumes:
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /var/run/docker.sock:/var/run/docker.sock
@@ -58,7 +58,7 @@ services:
      - "affinity:container!=*mesosslave*"
 
   cosmos:
-    image: linkerrepository/cosmos:0.1.5
+    image: {registry}/linkerrepository/cosmos:0.1.5
     volumes:
      - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
@@ -72,7 +72,7 @@ services:
      - "affinity:container!=*cosmos*"
 
   dnsserver:
-    image: linkerrepository/linker_mesos_dns:1.0.0
+    image: {registry}/linkerrepository/linker_mesos_dns:1.0.0
     volumes:
     - /linker/config:/linker/config
     network_mode: host
@@ -84,7 +84,7 @@ services:
      - "affinity:container!=*dnsserver*"
 
   universenginx:
-    image: linkerrepository/universe:latest
+    image: {registry}/linkerrepository/universe:latest
     env_file: .env
     command: nginx -g "daemon off;"
     network_mode: bridge
@@ -99,7 +99,7 @@ services:
      - "affinity:container!=*universenginx*"
 
   universeregistry:
-    image: linkerrepository/universe:latest
+    image: {registry}/linkerrepository/universe:latest
     env_file: .env
     command: registry serve /etc/docker/registry/config.yml
     network_mode: bridge
@@ -116,7 +116,7 @@ services:
      - "affinity:container!=*universeregistry*"
 
   adminrouter:
-    image: linkerrepository/linker_router:1.0.1
+    image: {registry}/linkerrepository/linker_router:1.0.1
     volumes:
      - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
@@ -130,7 +130,7 @@ services:
 
 
   prometheus:
-    image: prom/prometheus:v1.0.0
+    image: {registry}/prom/prometheus:v1.0.0
     network_mode: host
     entrypoint: /bin/prometheus
     command: -alertmanager.url=http://localhost:9093 -config.file=/etc/prometheus/prometheus.yml
@@ -144,7 +144,7 @@ services:
      - "affinity:container!=*prometheus*"
 
   alertmanager:
-    image: prom/alertmanager:v0.3.0
+    image: {registry}/prom/alertmanager:v0.3.0
     network_mode: host
     volumes:
     - /linker/alertmanager:/etc/alertmanager
@@ -156,7 +156,7 @@ services:
      - "affinity:container!=*alertmanager*"
 
   mongodb:
-    image: linkerrepository/linkerdcos_mongodb_repl:1.0.1
+    image: {registry}/linkerrepository/linkerdcos_mongodb_repl:1.0.1
     network_mode: host
     volumes:
     - /opt:/data
@@ -168,7 +168,7 @@ services:
      - "affinity:container!=*mongodb*"
 
   dcosclient:
-    image: linkerrepository/linkerdcos_client:1.1.2-cu
+    image: {registry}/linkerrepository/linkerdcos_client:1.1.2-cu
     network_mode: host
     volumes:
      - /etc/resolv.conf:/etc/resolv.conf
@@ -189,7 +189,7 @@ services:
      - "affinity:container!=*dcosclient*"    
 
   genresolvconf:
-    image: linkerrepository/linker_resolver:1.0.0
+    image: {registry}/linkerrepository/linker_resolver:1.0.0
     volumes:
      - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
@@ -202,7 +202,7 @@ services:
      - "affinity:container!=*genresolvconf*"
 
   cadvisormonitor:
-    image: linkerrepository/linker_cadvisor:1.0.0
+    image: {registry}/linkerrepository/linker_cadvisor:1.0.0
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock:rw
      - /:/rootfs:ro
@@ -219,7 +219,7 @@ services:
       - "affinity:container!=*cadvisormonitor*"
 
   webconsole:
-    image: linkerrepository/linker_webconsole:1.1.2
+    image: {registry}/linkerrepository/linker_webconsole:1.1.2
     volumes:
      - /linker/docker/${CLUSTER_OWNER}/${CLUSTER_NAME}/certs:/usr/local/bin/certs:ro
     network_mode: host

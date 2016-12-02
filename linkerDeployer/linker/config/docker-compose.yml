@@ -1,7 +1,7 @@
 version: '2'
 services:
   mesosmaster:
-    image: linkerrepository/mesos-master:0.28.1-1.1.2-cu
+    image: {registry}/linkerrepository/mesos-master:0.28.1-1.1.2-cu
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
@@ -17,7 +17,7 @@ services:
      - "affinity:container!=*mesosmaster*"
 
   marathon:
-    image: linkerrepository/marathon:1.1.1
+    image: {registry}/linkerrepository/marathon:1.1.1
     network_mode: host
     command: /entrypoint.sh
     env_file: .env
@@ -31,7 +31,7 @@ services:
 
 
   mesosslave:
-    image: linkerrepository/mesos-slave:0.28.1-1.1.2-cu
+    image: {registry}/linkerrepository/mesos-slave:0.28.1-1.1.2-cu
     volumes:
      - /sys/fs/cgroup:/sys/fs/cgroup
      - /var/run/docker.sock:/var/run/docker.sock
@@ -54,7 +54,7 @@ services:
      - "affinity:container!=*mesosslave*"
 
   dnsserver:
-    image: linkerrepository/linker_mesos_dns:1.0.0
+    image: {registry}/linkerrepository/linker_mesos_dns:1.0.0
     volumes:
     - /linker/config:/linker/config
     network_mode: host
@@ -66,7 +66,7 @@ services:
      - "affinity:container!=*dnsserver*"
 
   adminrouter:
-    image: linkerrepository/linker_router:1.0.1
+    image: {registry}/linkerrepository/linker_router:1.0.1
     volumes:
     - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
@@ -81,7 +81,7 @@ services:
      - "affinity:container!=*adminrouter*"
 
   genresolvconf:
-    image: linkerrepository/linker_resolver:1.0.0
+    image: {registry}/linkerrepository/linker_resolver:1.0.0
     volumes:
     - /etc/resolv.conf:/etc/resolv.conf
     network_mode: host
