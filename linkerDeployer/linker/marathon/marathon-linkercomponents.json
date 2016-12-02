@@ -20,7 +20,7 @@
           "container": {
             "type": "DOCKER",
             "docker": {
-              "image": "linkerrepository/linkerdcos_clustermgmt:latest",
+              "image": "{registry}/linkerrepository/linkerdcos_clustermgmt:latest",
               "network": "BRIDGE",
               "portMappings": [
                 {
@@ -67,7 +67,7 @@
           "container": {
             "type": "DOCKER",
             "docker": {
-              "image": "linkerrepository/linkerdcos_usermgmt:latest",
+              "image": "{registry}/linkerrepository/linkerdcos_usermgmt:latest",
               "network": "BRIDGE",
               "portMappings": [
                 {
@@ -107,7 +107,7 @@
           "container": {
             "type": "DOCKER",
             "docker": {
-              "image": "linkerrepository/linkerdcos_mongodb_repl:1.0.1",
+              "image": "{registry}/linkerrepository/linkerdcos_mongodb_repl:1.0.1",
               "network": "HOST",
               "privileged": true,
               "forcePullImage": false
@@ -160,7 +160,7 @@
                   "protocol": "tcp"
                 }
               ],
-              "image": "linkerrepository/linker_dcos_portal:latest",
+              "image": "{registry}/linkerrepository/linker_dcos_portal:latest",
               "privileged": true,
               "forcePullImage": false
             },
@@ -191,7 +191,7 @@
           "container": {
             "type": "DOCKER",
             "docker": {
-              "image": "linkerrepository/linker_dcos_redis:1.0.0",
+              "image": "{registry}/linkerrepository/linker_dcos_redis:1.0.0",
               "network": "BRIDGE",
               "portMappings": [
                 {
@@ -248,7 +248,7 @@
                   "protocol": "tcp"
                 }
               ],
-              "image": "linkerrepository/linker_dcos_deployer:latest",
+              "image": "{registry}/linkerrepository/linker_dcos_deployer:latest",
               "privileged": true,
               "forcePullImage": false
             },

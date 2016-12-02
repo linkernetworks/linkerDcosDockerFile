@@ -8,7 +8,7 @@
 			"container": {
 				"type": "DOCKER",
 				"docker": {
-					"image": "linkerrepository/linker_marathon_lb:1.0.0",
+					"image": "{registry}/linkerrepository/linker_marathon_lb:1.0.0",
 					"privileged": true,
 					"network": "HOST"
 				}
