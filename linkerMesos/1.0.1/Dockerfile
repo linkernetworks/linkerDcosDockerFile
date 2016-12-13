@@ -18,5 +18,5 @@ RUN mkdir -p /var/mesos/external_log && \
 RUN echo "deb http://repos.mesosphere.io/ubuntu/ trusty main" > /etc/apt/sources.list.d/mesosphere.list && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF && \
     apt-get -y update && \
-    apt-get -y --no-install-recommends install mesos=$(apt-cache madison mesos | grep ${VERSION} | awk '{print $3}' | head -1)
+    apt-get -y --no-install-recommends install mesos=$(apt-cache madison mesos | grep " ${VERSION}" | awk '{print $3}')
 
