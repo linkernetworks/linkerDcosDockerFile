@@ -54,7 +54,7 @@ services:
      - MESOS_CONTAINERIZERS=docker,mesos
      - MESOS_LOG_DIR=/var/log/mesos
      - MESOS_WORK_DIR=/var/lib/mesos/slave
-     - MESOS_ISOLATION=cgroups/cpu,cgroups/mem,disk/du,network/cni,filesystem/linux,docker/runtime,docker/volume
+     - MESOS_ISOLATION=cgroups/cpu,cgroups/mem,disk/du,filesystem/linux,docker/runtime,docker/volume
      - MESOS_SLAVE_SUBSYSTEMS=cpu,memory
      - MESOS_CGROUPS_ENABLE_CFS=true
      - MESOS_LOGGING_LEVEL=INFO
