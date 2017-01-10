@@ -27,7 +27,7 @@ services:
      - MARATHON_TASK_LAUNCH_TIMEOUT=900000
      - MARATHON_MESOS_ROLE=slave_public
      - MARATHON_MESOS_AUTHENTICATION_PRINCIPAL=dcos_marathon
-     - MESOS_ENABLE_FEATURES=vips,task_killing,external_volumes
+     - MARATHON_ENABLE_FEATURES=vips,task_killing,external_volumes
      - "constraint:master==true"
      - "affinity:container!=*marathon*"
 
